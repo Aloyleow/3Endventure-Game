@@ -6,11 +6,27 @@ header {
     align-items: center;
 }
 
-div {
+/* div {
+    display: inline;
     height: 540px;
+    text-align: center;
+} */
+#content {
+    height: 80px;
+    font-size: 30px;
     text-align: center;
 }
 
+#playerNumber {
+    height: 240px;
+    font-size: 80px;
+    text-align: right;
+}
+#enemyNumber {
+    height: 240px;
+    font-size: 80px;
+    text-align: left, bottom;
+}
 footer{
     background-color: aqua;
     display: flex;

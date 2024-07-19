@@ -16,152 +16,120 @@ const content = document.querySelector("#content");
 
 console.log(button1, button2, button3);
 //PAGE 1
+
+//change of button contents 
 function changeTextButton(){
     button1.textContent = "Human"
     button2.textContent = "Knight"
-    button3.textContent = "Mage"
-    
+    button3.textContent = "Mage" 
 }
-
-function changeTextButton2(){
-    button1.textContent = "Fight a Dragon!"
-    button2.textContent = "Fight a Slime"
+function changeTextButtonHuman(){
+    button1.textContent = "Fight a Slime"
+    button2.textContent = "Fight a Dragon!"
     button3.textContent = "Chill"
 }
+function changeTextButtonHumanRoll(){
+    button1.textContent = "ROLL"
+}
+function changeTextButtonKnightMage(){
+    button1.textContent = "Fight a Slime"
+    button2.textContent = "Fight a Dragon!"
+    button3.textContent = "Train with the GOW"
+}
+
+//Page 1 Choosing char
 function buttonClickA() {
     button1.addEventListener("click", () => {
-        content.textContent = "HUMAN !!!!"
-        buttonHumanA();
-        buttonHumanB();
-        buttonHumanC();
+        content.textContent = "HUMAN !!!! What do you wan to do ?"
+        buttonHuman();
     })
 }
 
 function buttonClickB() {
     button2.addEventListener("click", () => {
-        content.textContent = "KNIGHT !!!"
-        buttonKnightA()
-        buttonKnightB()
-        buttonKnightC()
+        content.textContent = "KNIGHT !!! who you wanna slay ?"
+        buttonKnight()
+        
     })  
 }
 
 function buttonClickC() {
     button3.addEventListener("click", () => {
-        content.textContent = "MAGE !!!"
-        buttonMageA()
-        buttonMageB()
-        buttonMageC()
+        content.textContent = "MAGE !!! tiu tiu tiu..."
+        buttonMage()
+        
     })  
 }
 
 
 
 //PAGE 2 Human
-
-function buttonHumanA() {
+function buttonHuman() {
+    changeTextButtonHuman()
     button1.addEventListener("click", () => {
-        content.textContent = "YOU DIED !!!! after fighting a slime lol"
-        if (button1 || button2 || button3) {
-            button1.style.display = "none"
-            button2.style.display = "none"
-            button3.style.display = "none"
-        }
-        changeTextButton2()
+        content.textContent = "Squash Squash kill that thing" 
+        button3.style.display = "none";
+        button2.style.display = "none";
+        changeTextButtonHumanRoll()
     })
-}
-
-function buttonHumanB() {
     button2.addEventListener("click", () => {
-        content.textContent = "YOU DIED !!!!.....obviously. after fighting a dragon....."
-        if (button1 || button2 || button3) {
-            button1.style.display = "none"
-            button2.style.display = "none"
-            button3.style.display = "none"
-        }
+        content.textContent = "FIGHTTT!! FOR YOUR LIFEEEE"
+        button3.style.display = "none";
+        button2.style.display = "none"
+        changeTextButtonHumanRoll()
+    })
+    button3.addEventListener("click", () => { 
+        content.textContent = "YOU DIED !!!..off old age..Yawnzz"
+        button1.style.display = "none";
+        button2.style.display = "none";
+        button3.style.display = "none";
     })
 }
 
-function buttonHumanC() {
-    button3.addEventListener("click", () => {
-        content.textContent = "YOU DIED !!!!.....of old age. yawnnzzz"
-        if (button1 || button2 || button3) {
-            button1.style.display = "none"
-            button2.style.display = "none"
-            button3.style.display = "none"
-        }
-    })
-}
+// function buttonHuman() {
+//     changeTextButtonHuman()
+//     button1.addEventListener("click", () => {
+//         content.textContent = "YOU DIED !!!! after fighting a slime lol"  
+//     })
+//     button2.addEventListener("click", () => {
+//         content.textContent = "YOU DIED !!!!.....obviously. after fighting a dragon....."
+//     })
+//     button3.addEventListener("click", () => {
+//         content.textContent = "YOU DIED !!!..off old age..Yawnzz"
+//     })
+// }
+
+
 
 //PAGE 2 knight
-
-function buttonKnightA() {
+function buttonKnight() {
+    changeTextButtonKnightMage()
     button1.addEventListener("click", () => {
         content.textContent = "YOU DIED !!!! after fighting a slime lol...cause slimeyy"
-        if (button1 || button2 || button3) {
-            button1.style.display = "none"
-            button2.style.display = "none"
-            button3.style.display = "none"
-        }
     })
-}
-
-function buttonKnightB() {
     button2.addEventListener("click", () => {
         content.textContent = "YOU SURVIVED!!! nice job killing that thicck lizard"
-        if (button1 || button2 || button3) {
-            button1.style.display = "none"
-            button2.style.display = "none"
-            button3.style.display = "none"
-        } 
     })
-}
-
-function buttonKnightC() {
     button3.addEventListener("click", () => {
         content.textContent = "YOU DIED !!!! of old age. welp training with a god aint short bruh"
-        if (button1 || button2 || button3) {
-            button1.style.display = "none"
-            button2.style.display = "none"
-            button3.style.display = "none"
-        }
-    })
+    }) 
 }
+
 
 //Page 2 Mage
-
-function buttonMageA() {
+function buttonMage() {
+    changeTextButtonKnightMage()
     button1.addEventListener("click", () => {
         content.textContent = "YOU DIED !!!! after fighting a slime ?....causeeee itss slimeyyyyyy"
-        if (button1 || button2 || button3) {
-            button1.style.display = "none"
-            button2.style.display = "none"
-            button3.style.display = "none"
-        }
     })
-}
-
-function buttonMageB() {
     button2.addEventListener("click", () => {
         content.textContent = "YOU DIED !!!! after fighting a dragon.. Tragic..."
-        if (button1 || button2 || button3) {
-            button1.style.display = "none"
-            button2.style.display = "none"
-            button3.style.display = "none"
-        }
+    })
+    button3.addEventListener("click", () => {
+        content.textContent = "Wow you ascended to be a god ? whats next ?"
     })
 }
 
-function buttonMageC() {
-    button3.addEventListener("click", () => {
-        content.textContent = "Wow you ascended to be a god ? whats next ?"
-        if (button1 || button2 || button3) {
-            button1.style.display = "none"
-            button2.style.display = "none"
-            button3.style.display = "none"
-        }
-    })
-}
 changeTextButton()
 buttonClickA()
 buttonClickB()
