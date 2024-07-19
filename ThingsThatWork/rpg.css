@@ -17,16 +17,18 @@ header {
     text-align: center;
 }
 
-#playerNumber {
+#enemyNumber {
     height: 240px;
     font-size: 80px;
     text-align: right;
 }
-#enemyNumber {
+
+#playerNumber {
     height: 240px;
     font-size: 80px;
-    text-align: left, bottom;
+    text-align: left;
 }
+
 footer{
     background-color: aqua;
     display: flex;

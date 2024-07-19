@@ -3,6 +3,8 @@
 // after clicking buttons, content and button text will change 
 // 1st variable what page ? or what option chosen ? tag a number of the path chosen in an array []
 // 2nd variable 
+let playerScore ;
+let enemyScore ;
 const numberRoll = [1,2,3,4,5,6,7,8,9,10];
 
 const button1 = document.querySelector("#button1");
@@ -16,8 +18,8 @@ const enemyRoll = document.querySelector("#enemyNumber")
 
 console.log(playerRoll, enemyRoll);
 console.log(button1, button2, button3);
-console.log(rng());
-console.log(rng());
+
+
 //PAGE 1
 
 //RNG funcs
@@ -47,6 +49,8 @@ function rng(){
     }   
 }
 
+
+
 function showRoll(){
     playerRoll.style.visibility = "visible";
     enemyRoll.style.visibility = "visible";
@@ -57,8 +61,11 @@ function hideRoll(){
 }
 
 function rollScore(){
-    playerRoll.textContent = numebrRoll[1];
-    enemyRoll.textContent = numberRoll[9];
+    playerScore = rng()
+    enemyScore = rng()
+    playerRoll.textContent = playerScore
+    enemyRoll.textContent = enemyScore
+
 }
 
 //change of button contents 
@@ -84,11 +91,7 @@ function changeTextButtonKnightMage(){
 function changeTextButtonRoll(){
     button3.style.display = "none";
     button2.style.display = "none";
-    button1.textContent = "ROLL";
-    // button1.addEventListener("click", () => {
-    //     rng()
-    // })
-    
+    button1.textContent = "ROLL";      
 }
 
 
@@ -124,12 +127,19 @@ function buttonHuman() {
     button1.addEventListener("click", () => {
         content.textContent = "Squash Squash kill that thing" ;
         changeTextButtonRoll()
-        showRoll()
+        button1.addEventListener("click", () => {
+            rollScore()
+            showRoll()
+            if (playerScore <= enemyScore){
+                deathbySlime()
+            }  
+        })
+            
     })
     button2.addEventListener("click", () => {
         content.textContent = "FIGHTTT!! FOR YOUR LIFEEEE";
         changeTextButtonRoll()
-        showRoll()
+           
     })
     button3.addEventListener("click", () => { 
         content.textContent = "YOU DIED !!!..off old age..Yawnzz";
@@ -137,8 +147,8 @@ function buttonHuman() {
         button2.style.display = "none";
         button3.style.display = "none";
     })
-}
 
+}
 
 //Knight func
 function buttonKnight() {
@@ -146,17 +156,14 @@ function buttonKnight() {
     button1.addEventListener("click", () => {
         content.textContent = "Slash Slaush ? Wad de Slush";
         changeTextButtonRoll()
-        showRoll()
     })
     button2.addEventListener("click", () => {
         content.textContent = "Slice those chonky thic legs";
         changeTextButtonRoll()
-        showRoll()
     })
     button3.addEventListener("click", () => {
         content.textContent = "train to kill";
         changeTextButtonRoll()
-        showRoll()
     }) 
 }
 
@@ -167,18 +174,23 @@ function buttonMage() {
     button1.addEventListener("click", () => {
         content.textContent = "no mana or banana ?";
         changeTextButtonRoll()
-        showRoll()
     })
     button2.addEventListener("click", () => {
         content.textContent = "BANG! POW! , wait, no, tiu tiu tiu!!!";
         changeTextButtonRoll()
-        showRoll()
     })
     button3.addEventListener("click", () => {
         content.textContent = "train to shoot";
         changeTextButtonRoll()
-        showRoll()
     })
+}
+
+//
+function deathbySlime() {
+    content.textContent = "YOU DIED!!!! killed by a slime...lol...noob"
+    button1.style.display = "none";
+    button2.style.display = "none";
+    button3.style.display = "none";
 }
 
 // render
