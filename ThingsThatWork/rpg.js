@@ -81,6 +81,21 @@ function changeTextButtonHuman(){
     button3.textContent = "Chill";
 }
 
+function changeTextButtonHumanSlime(){
+    button3.style.visibility = "visible";
+    button1.style.visibility = "visible";
+    button1.textContent = "Fight a Slime";
+    button2.textContent = "Fight a Dragon!";
+    button3.textContent = "Chill lahhhh";
+}
+
+function changeTextButtonHumanDragon(){
+    button3.style.visibility = "visible";
+    button1.style.visibility = "visible";
+    button1.textContent = "Fight a Slime";
+    button2.textContent = "Fight a Dragon!";
+    button3.textContent = "Chill lahhhh";
+}
 
 function changeTextButtonKnightMage(){
     button1.textContent = "Fight a Slime";
@@ -88,10 +103,18 @@ function changeTextButtonKnightMage(){
     button3.textContent = "Train with the GOW";
 }
 
+function changeTextButtonKMDragon(){
+    button3.style.visibility = "visible";
+    button1.style.visibility = "visible";
+    button1.textContent = "Fight a Slime";
+    button2.textContent = "Fight a Dragon!";
+    button3.textContent = "Chill lahhhh";
+}
+
 function changeTextButtonRoll(){
-    button3.style.display = "none";
-    button2.style.display = "none";
-    button1.textContent = "ROLL";      
+    button3.style.visibility = "hidden";
+    button2.textContent = "ROLL"; 
+    button1.style.visibility = "hidden";    
 }
 
 
@@ -127,18 +150,33 @@ function buttonHuman() {
     button1.addEventListener("click", () => {
         content.textContent = "Squash Squash kill that thing" ;
         changeTextButtonRoll()
-        button1.addEventListener("click", () => {
-            rollScore()
+        button2.addEventListener("click", () => {
             showRoll()
+            rollScore()
             if (playerScore <= enemyScore){
                 deathbySlime()
-            }  
+            } else {
+                wonSlime()
+                changeTextButtonHumanSlime()
+            }
+            
         })
             
     })
     button2.addEventListener("click", () => {
         content.textContent = "FIGHTTT!! FOR YOUR LIFEEEE";
         changeTextButtonRoll()
+        button2.addEventListener("click", () => {
+            showRoll()
+            rollScore()
+            if (playerScore <= 8 || playerScore <= enemyScore){
+                deathbyDragon()
+            } else {
+                wonDragon()
+                changeTextButtonHumanDragon()
+            }
+            
+        })
            
     })
     button3.addEventListener("click", () => { 
@@ -156,10 +194,32 @@ function buttonKnight() {
     button1.addEventListener("click", () => {
         content.textContent = "Slash Slaush ? Wad de Slush";
         changeTextButtonRoll()
+        button2.addEventListener("click", () => {
+            showRoll()
+            rollScore()
+            if (playerScore <= enemyScore){
+                deathbySlime()
+            } else {
+                wonSlime()
+                changeTextButtonHumanSlime()
+            }
+            
+        })
     })
     button2.addEventListener("click", () => {
         content.textContent = "Slice those chonky thic legs";
         changeTextButtonRoll()
+        button2.addEventListener("click", () => {
+            showRoll()
+            rollScore()
+            if (playerScore <= enemyScore){
+                deathbyDragon()
+            } else {
+                wonDragon()
+                changeTextButtonKMDragon()
+            }
+            
+        })
     })
     button3.addEventListener("click", () => {
         content.textContent = "train to kill";
@@ -185,12 +245,29 @@ function buttonMage() {
     })
 }
 
-//
+//Deaths
 function deathbySlime() {
     content.textContent = "YOU DIED!!!! killed by a slime...lol...noob"
     button1.style.display = "none";
     button2.style.display = "none";
     button3.style.display = "none";
+}
+
+function deathbyDragon() {
+    content.textContent = "YOU DIED!!!! obviously...dragon leh"
+    button1.style.display = "none";
+    button2.style.display = "none";
+    button3.style.display = "none";
+}
+
+
+//Wins
+function wonSlime() {
+    content.textContent = "just a slime....chill..what you gonna do next ?"
+}
+
+function wonDragon() {
+    content.textContent = "WELL DONE!!!, you practically ascended to dragon lord after getting dragon blood on your face."
 }
 
 // render
