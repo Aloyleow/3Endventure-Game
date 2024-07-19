@@ -1,0 +1,28 @@
+header {
+    display: flex;
+    background-color: bisque;
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+}
+
+div {
+    height: 540px;
+    text-align: center;
+}
+
+footer {
+    background-color: aqua;
+    display: flex;
+    height: 180px;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+button{ 
+    height: 140px;
+    width: 140px;
+}
+
+
