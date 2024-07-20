@@ -103,6 +103,14 @@ function changeTextButtonKnightMage(){
     button3.textContent = "Train with the GOW";
 }
 
+function changeTextButtonKMSlime(){
+    button3.style.visibility = "visible";
+    button1.style.visibility = "visible";
+    button1.textContent = "Fight a Slime";
+    button2.textContent = "Fight a Dragon!";
+    button3.textContent = "Chill lahhhh";
+}
+
 function changeTextButtonKMDragon(){
     button3.style.visibility = "visible";
     button1.style.visibility = "visible";
@@ -180,10 +188,7 @@ function buttonHuman() {
            
     })
     button3.addEventListener("click", () => { 
-        content.textContent = "YOU DIED !!!..off old age..Yawnzz";
-        button1.style.display = "none";
-        button2.style.display = "none";
-        button3.style.display = "none";
+        deathbyOld()
     })
 
 }
@@ -201,7 +206,7 @@ function buttonKnight() {
                 deathbySlime()
             } else {
                 wonSlime()
-                changeTextButtonHumanSlime()
+                changeTextButtonKMSlime()
             }
             
         })
@@ -215,7 +220,7 @@ function buttonKnight() {
             if (playerScore <= enemyScore){
                 deathbyDragon()
             } else {
-                wonDragon()
+                wonDragonKM()
                 changeTextButtonKMDragon()
             }
             
@@ -234,10 +239,28 @@ function buttonMage() {
     button1.addEventListener("click", () => {
         content.textContent = "no mana or banana ?";
         changeTextButtonRoll()
+        button2.addEventListener("click", () => {
+            showRoll()
+            rollScore()
+            if (playerScore <= enemyScore){
+                deathbySlime()
+            } else {
+                wonSlime()
+                changeTextButtonKMSlime()
+            }
+            
+        })
     })
     button2.addEventListener("click", () => {
         content.textContent = "BANG! POW! , wait, no, tiu tiu tiu!!!";
         changeTextButtonRoll()
+        if (playerScore <= enemyScore){
+            deathbyDragon()
+        } else {
+            wonDragonKM()
+            changeTextButtonKMDragon()
+        }
+        
     })
     button3.addEventListener("click", () => {
         content.textContent = "train to shoot";
@@ -246,6 +269,12 @@ function buttonMage() {
 }
 
 //Deaths
+function deathbyOld() {
+    content.textContent = "YOU DIED !!!..off old age..Yawnzz";
+    button1.style.display = "none";
+    button2.style.display = "none";
+    button3.style.display = "none";
+}
 function deathbySlime() {
     content.textContent = "YOU DIED!!!! killed by a slime...lol...noob"
     button1.style.display = "none";
@@ -267,7 +296,11 @@ function wonSlime() {
 }
 
 function wonDragon() {
-    content.textContent = "WELL DONE!!!, you practically ascended to dragon lord after getting dragon blood on your face."
+    content.textContent = "WELL DONE human!!!, you practically ascended to dragon lord after getting dragon blood on your face."
+}
+
+function wonDragonKM() {
+    content.textContent = "Chonky lizard dieded....What you gonna do next ?"
 }
 
 // render
