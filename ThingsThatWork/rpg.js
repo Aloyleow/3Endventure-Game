@@ -96,9 +96,9 @@ function changeTextButtonHumanSlime(){
 function changeTextButtonHumanDragon(){
     button3.style.visibility = "visible";
     button1.style.visibility = "visible";
-    button1.textContent = "Fight a Slime";
-    button2.textContent = "Fight a Dragon!";
-    button3.textContent = "Chill lahhhh";
+    button1.textContent = "Kill the Anomaly";
+    button2.textContent = "Train with the GOW";
+    button3.textContent = "Chill with a glass of teh ping";
 }
 
 function changeTextButtonKnightMage(){
@@ -124,7 +124,7 @@ function changeTextButtonKMDragon(){
     button3.textContent = "Chill lahhhh";
 }
 
-function changeTextButtonKMtrain(){
+function changeTextButtonTrain(){
     button1.style.visibility = "visible";
     button2.style.visibility = "visible";
     button3.style.visibility = "visible";
@@ -133,10 +133,17 @@ function changeTextButtonKMtrain(){
     button3.textContent = "Eat a Quadrillion plate of ZAP CAI PENG with neker gen neker gen neker ling curry zi hai you ji dan";
 }
 
-function changeTextButtonAnomaly(){
+function changeTextButtonAnomalyKnight(){
     button3.style.visibility = "hidden";
     button2.style.visibility = "visible";
     button2.textContent = "Ching Ching Ching readyy!!"; 
+    button1.style.visibility = "hidden";
+}
+
+function changeTextButtonAnomalyMage(){
+    button3.style.visibility = "hidden";
+    button2.style.visibility = "visible";
+    button2.textContent = "tiu tiu tiu readyy!!"; 
     button1.style.visibility = "hidden";
 }
 
@@ -194,7 +201,7 @@ function buttonHuman() {
             }
             
         })
-            
+           
     })
     button2.addEventListener("click", () => {
         content.textContent = "FIGHTTT!! FOR YOUR LIFEEEE";
@@ -202,11 +209,12 @@ function buttonHuman() {
         button2.addEventListener("click", () => {
             showRoll()
             rollScore()
-            if (playerScore <= 8 || playerScore <= enemyScore){
+            if (playerScore <= 8 || playerScore <= enemyScore ){
                 deathbyDragon()
             } else {
                 wonDragon()
                 changeTextButtonHumanDragon()
+                afterDragonHuman()
             }
             
         })
@@ -214,6 +222,7 @@ function buttonHuman() {
     })
     button3.addEventListener("click", () => { 
         deathbyOld()
+        hideRoll()
     })
 
 }
@@ -255,7 +264,7 @@ function buttonKnight() {
     })
     button3.addEventListener("click", () => {
         content.textContent = "Train to kill";
-        changeTextButtonKMtrain()
+        changeTextButtonTrain()
         training()
     }) 
 }
@@ -275,6 +284,7 @@ function buttonMage() {
             } else {
                 wonSlime();
                 changeTextButtonKMSlime();
+                afterSlimeMage()
             }
             
         })
@@ -292,7 +302,7 @@ function buttonMage() {
     })
     button3.addEventListener("click", () => {
         content.textContent = "Train to shoot";
-        changeTextButtonKMtrain();
+        changeTextButtonTrain();
         training();
     })
 }
@@ -337,10 +347,11 @@ function afterSlimeHuman() {
         deathbyOld();
     });
 }
+
 function afterSlimeKnight() {
     button1.addEventListener("click", () => {
         content.textContent = "This anamoly is extremly hard please prepare your ching ching ching"
-        changeTextButtonAnomaly()
+        changeTextButtonAnomalyKnight()
         hideRoll()
     })
     button2.addEventListener("click", () => {
@@ -363,6 +374,57 @@ function afterSlimeKnight() {
         hideRoll();
         changeTextButtonKMtrain();
         training();
+    })
+
+}
+
+function afterSlimeMage() {
+    button1.addEventListener("click", () => {
+        content.textContent = "This anamoly is extremly difficult, get your tiu tiu tiu ready"
+        changeTextButtonAnomalyMage()
+        hideRoll()
+    })
+    button2.addEventListener("click", () => {
+        content.textContent = "Time to kill de chonky lizard!!!"
+        changeTextButtonRoll();
+        hideRoll();
+        button2.addEventListener("click", () => {
+            showRoll();
+            rollScore();
+            if (playerScore <= enemyScore){
+                deathbyDragon();
+            } else {
+                wonDragonKM();   
+            }
+            
+        })
+    })
+    button3.addEventListener("click", () => {
+        content.textContent = "Train to kill";
+        hideRoll();
+        changeTextButtonKMtrain();
+        training();
+    })
+}
+
+//AFTER DRAGON BOSS FUNCTION
+
+function afterDragonHuman() {
+    
+    button1.addEventListener("click", () =>{
+        content.textContent = "Dragon Lord get ready!!!"
+        changeTextButtonRoll()
+        hideRoll()
+
+    })
+    button2.addEventListener("click", () =>{
+        content.textContent = "Train to kill!!";
+        hideRoll()
+        changeTextButtonTrain()
+        training()
+    })
+    button3.addEventListener("click", () =>{
+        deathbyOld()
     })
 
 }
