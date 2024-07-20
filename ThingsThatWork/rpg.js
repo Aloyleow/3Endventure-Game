@@ -88,7 +88,7 @@ function changeTextButtonHuman(){
 function changeTextButtonHumanSlime(){
     button3.style.visibility = "visible";
     button1.style.visibility = "visible";
-    button1.textContent = "Fight a Slime";
+    button1.textContent = "Fight the GOW";
     button2.textContent = "Fight a Dragon!";
     button3.textContent = "Chill lahhhh";
 }
@@ -109,10 +109,11 @@ function changeTextButtonKnightMage(){
 
 function changeTextButtonKMSlime(){
     button3.style.visibility = "visible";
+    button2.style.visibility = "visible";
     button1.style.visibility = "visible";
-    button1.textContent = "Fight a Slime";
+    button1.textContent = "Fight the Anomaly!";
     button2.textContent = "Fight a Dragon!";
-    button3.textContent = "Chill lahhhh";
+    button3.textContent = "Train with the GOW";
 }
 
 function changeTextButtonKMDragon(){
@@ -124,19 +125,31 @@ function changeTextButtonKMDragon(){
 }
 
 function changeTextButtonKMtrain(){
+    button1.style.visibility = "visible";
+    button2.style.visibility = "visible";
+    button3.style.visibility = "visible";
     button1.textContent = "Do a Quadrillion push ups!!";
     button2.textContent = "Do a Quadrillion sit ups!!";
     button3.textContent = "Eat a Quadrillion plate of ZAP CAI PENG with neker gen neker gen neker ling curry zi hai you ji dan";
 }
 
+function changeTextButtonAnomaly(){
+    button3.style.visibility = "hidden";
+    button2.style.visibility = "visible";
+    button2.textContent = "Ching Ching Ching readyy!!"; 
+    button1.style.visibility = "hidden";
+}
+
 function changeTextButtonRoll(){
     button3.style.visibility = "hidden";
+    button2.style.visibility = "visible";
     button2.textContent = "ROLL"; 
     button1.style.visibility = "hidden";    
 }
 
 
 //CHOOSING CHARACTER
+
 function buttonClickA() {
     button1.addEventListener("click", () => {
         content.textContent = "HUMAN !!!! What do you wan to do ?";
@@ -163,6 +176,7 @@ function buttonClickC() {
 
 
 //HUMAN FUNCTION
+
 function buttonHuman() {
     changeTextButtonHuman()
     button1.addEventListener("click", () => {
@@ -176,6 +190,7 @@ function buttonHuman() {
             } else {
                 wonSlime()
                 changeTextButtonHumanSlime()
+                afterSlimeHuman()
             }
             
         })
@@ -204,6 +219,7 @@ function buttonHuman() {
 }
 
 //KNIGHT FUNCTION
+
 function buttonKnight() {
     changeTextButtonKnightMage()
     button1.addEventListener("click", () => {
@@ -217,6 +233,7 @@ function buttonKnight() {
             } else {
                 wonSlime()
                 changeTextButtonKMSlime()
+                afterSlimeKnight()
             }
             
         })
@@ -243,44 +260,114 @@ function buttonKnight() {
     }) 
 }
 
-
-
-
 //MAGE FUNCTION
+
 function buttonMage() {
-    changeTextButtonKnightMage()
+    changeTextButtonKnightMage();
     button1.addEventListener("click", () => {
         content.textContent = "no mana or banana ?";
         changeTextButtonRoll()
         button2.addEventListener("click", () => {
-            showRoll()
-            rollScore()
+            showRoll();
+            rollScore();
             if (playerScore <= enemyScore){
-                deathbySlime()
+                deathbySlime();
             } else {
-                wonSlime()
-                changeTextButtonKMSlime()
+                wonSlime();
+                changeTextButtonKMSlime();
             }
             
         })
     })
     button2.addEventListener("click", () => {
         content.textContent = "BANG! POW! , wait, no, tiu tiu tiu!!!";
-        changeTextButtonRoll()
+        changeTextButtonRoll();
         if (playerScore <= enemyScore){
-            deathbyDragon()
+            deathbyDragon();
         } else {
-            wonDragonKM()
-            changeTextButtonKMDragon()
+            wonDragonKM();
+            changeTextButtonKMDragon();
         }
         
     })
     button3.addEventListener("click", () => {
         content.textContent = "Train to shoot";
-        changeTextButtonKMtrain()
+        changeTextButtonKMtrain();
+        training();
     })
 }
+
+//AFTER SLIME BOSS FUNCTION
+
+function afterSlimeHuman() {
+    button1.addEventListener("click", () => {
+        content.textContent = "After killing the slime you feel like a sigma ? ok lorr you try"
+        changeTextButtonRoll();
+        hideRoll();
+        button2.addEventListener("click", () => {
+            showRoll();
+            rollScore();
+            if (playerScore !== 10){
+                deathbyGowHuman();
+            } else {
+                wonGOW();    
+            }
+            
+        })
+        
+    })
+    button2.addEventListener("click", () => {
+        content.textContent = "Time to kill de chonky lizard!!!"
+        changeTextButtonRoll();
+        hideRoll();
+        button2.addEventListener("click", () => {
+            showRoll();
+            rollScore();
+            if (playerScore <= enemyScore){
+                deathbyDragon();
+            } else {
+                wonDragon();   
+            }
+            
+        })
+        
+    })
+    button3.addEventListener("click", () => { 
+        hideRoll();
+        deathbyOld();
+    });
+}
+function afterSlimeKnight() {
+    button1.addEventListener("click", () => {
+        content.textContent = "This anamoly is extremly hard please prepare your ching ching ching"
+        changeTextButtonAnomaly()
+        hideRoll()
+    })
+    button2.addEventListener("click", () => {
+        content.textContent = "Time to kill de chonky lizard!!!"
+        changeTextButtonRoll();
+        hideRoll();
+        button2.addEventListener("click", () => {
+            showRoll();
+            rollScore();
+            if (playerScore <= enemyScore){
+                deathbyDragon();
+            } else {
+                wonDragonKM();   
+            }
+            
+        })
+    })
+    button3.addEventListener("click", () => {
+        content.textContent = "Train to kill";
+        hideRoll();
+        changeTextButtonKMtrain();
+        training();
+    })
+
+}
 //TRAINING FUNCTIONS
+
 function training() {
     button1.addEventListener("click", () => {
         content.textContent = "1st push up";
@@ -322,7 +409,7 @@ function training() {
             showRollPlayer()
             rollScore()
             if (playerScore !== 10){
-                deathbyTraining()
+                deathbyZCP()
             } else {   
                 content.textContent = "errr weelll....you full ?"            
             }
@@ -332,42 +419,51 @@ function training() {
 
 }
 //DEATHS FUNCTION
+
 function deathbyOld() {
     content.textContent = "YOU DIED !!!..off old age..Yawnzz";
-    button1.style.display = "none";
-    button2.style.display = "none";
-    button3.style.display = "none";
+    button1.style.visibility = "hidden";
+    button2.style.visibility = "hidden";
+    button3.style.visibility = "hidden";
 }
 function deathbySlime() {
     content.textContent = "YOU DIED!!!! killed by a slime...lol...noob"
-    button1.style.display = "none";
-    button2.style.display = "none";
-    button3.style.display = "none";
+    button1.style.visibility = "hidden";
+    button2.style.visibility = "hidden";
+    button3.style.visibility = "hidden";
 }
 
 function deathbyDragon() {
     content.textContent = "YOU DIED!!!! obviously...dragon leh"
-    button1.style.display = "none";
-    button2.style.display = "none";
-    button3.style.display = "none";
+    button1.style.visibility = "hidden";
+    button2.style.visibility = "hidden";
+    button3.style.visibility = "hidden";
 }
 
 function deathbyTraining() {
     content.textContent = "YOU DIED!!!! err.....you weak lor"
-    button1.style.display = "none";
-    button2.style.display = "none";
-    button3.style.display = "none";
+    button1.style.visibility = "hidden";
+    button2.style.visibility = "hidden";
+    button3.style.visibility = "hidden";
 }
 
 function deathbyZCP() {
     content.textContent = "YOU DIED!!!! yeaaaaaaa i mean thats alot of rice"
-    button1.style.display = "none";
-    button2.style.display = "none";
-    button3.style.display = "none";
+    button1.style.visibility = "hidden";
+    button2.style.visibility = "hidden";
+    button3.style.visibility = "hidden";
+}
+
+function deathbyGowHuman() {
+    content.textContent = "YOU DIED!!!! ah fight a god lahh....orbigood"
+    button1.style.visibility = "hidden";
+    button2.style.visibility = "hidden";
+    button3.style.visibility = "hidden";
 }
 
 
 //WINS FUNCTION
+
 function wonSlime() {
     content.textContent = "just a slime....chill..what you gonna do next ?"
 }
@@ -383,6 +479,14 @@ function wonDragonKM() {
 function wonTraining() {
     content.textContent = "WOW chonky thihck muscles"
 }
+
+function wonGOW() {
+    content.textContent = "Wow human, your rolls are exceptional, go buy toto now!"
+    button1.style.visibility = "hidden";
+    button2.style.visibility = "hidden";
+    button3.style.visibility = "hidden";
+}
+
 
 // RENDER
 function render() {
