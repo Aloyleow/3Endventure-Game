@@ -17,17 +17,34 @@ header {
     text-align: center;
 }
 
-#enemyNumber {
-    height: 240px;
+.enemyNumber {
+    display: grid;
+    height: 120px;
     font-size: 80px;
     text-align: right;
 }
 
-#playerNumber {
-    height: 240px;
+#enemyHealth {
+    height: 120px;
+    font-size: 80px;
+    color: red;
+    text-align: right;
+}
+
+.playerNumber {
+    display: grid;
+    height: 120px;
     font-size: 80px;
     text-align: left;
 }
+
+#playerHealth {
+    height: 120px;
+    font-size: 80px;
+    color: red;
+}
+
+
 
 footer{
     background-color: aqua;

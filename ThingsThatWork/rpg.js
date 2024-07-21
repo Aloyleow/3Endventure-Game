@@ -2,7 +2,15 @@
 
 // after clicking buttons, content and button text will change 
 // 1st variable what page ? or what option chosen ? tag a number of the path chosen in an array []
-// 2nd variable 
+// 2nd variable
+
+const health = {
+    anomalyHealth: 50,
+    playerHealthHuman: 35,
+    playerHealthDragonLord: 50,
+    playerHealthaftTrain: 50,
+    playerHealthGOW: 100,
+}
 let playerScore ;
 let enemyScore ;
 const numberRoll = [1,2,3,4,5,6,7,8,9,10];
@@ -13,13 +21,17 @@ const button3 = document.querySelector("#button3");
 
 const content = document.querySelector("#content");
 
-const playerRoll = document.querySelector("#playerNumber");
-const enemyRoll = document.querySelector("#enemyNumber");
+const playerRoll = document.querySelector(".playerNumber");
+const enemyRoll = document.querySelector(".enemyNumber");
+
+const playerHealth = document.querySelector("#playerHealth");
+const enemyHealth = document.querySelector("#enemyHealth")
+
+
 
 console.log(playerRoll, enemyRoll);
 console.log(button1, button2, button3);
-
-
+console.log(playerHealth,enemyHealth);
 //PAGE 1
 
 //RNG funcs
@@ -49,8 +61,6 @@ function rng(){
     }   
 }
 
-
-
 function showRoll(){
     playerRoll.style.visibility = "visible";
     enemyRoll.style.visibility = "visible";
@@ -59,6 +69,16 @@ function showRollPlayer(){
     playerRoll.style.visibility = "visible";
     enemyRoll.style.visibility = "hidden";
 }
+function showHealth(){
+    playerHealth.style.visibility ="visible"
+    enemyHealth.style.visibility ="visible"
+}
+
+function hideHealth(){
+    playerHealth.style.visibility ="hidden"
+    enemyHealth.style.visibility ="hidden"
+}
+
 function hideRoll(){
     playerRoll.style.visibility = "hidden";
     enemyRoll.style.visibility = "hidden";
@@ -346,7 +366,8 @@ function afterSlimeHuman() {
             if (playerScore !== 10){
                 deathbyGowHuman();
             } else {
-                wonGOW();    
+                wonGOW();
+                changeTextButtonAftTrain()    
             }
             
         })
@@ -457,8 +478,9 @@ function afterDragonHuman() {
 function afterDragonKnight() {
     button1.addEventListener("click", () =>{
         content.textContent = "This anamoly is extremly hard please prepare your ching ching ching"
-        changeTextButtonAnomalyMage()
+        changeTextButtonAnomalyKnight()
         hideRoll()
+        anomaly()
     })
 
     button3.addEventListener("click", () => {
@@ -579,7 +601,24 @@ function contEating() {
         hideRoll();
     })
 }
-//DEATHS FUNCTION
+
+//ANOMALY FUNCTIONS
+function anomaly() {
+    button2.addEventListener("click", () => {
+        content.textContent = "Slash it SlASH IT!"
+        playerHealth.textContent = health.playerHealthHuman 
+        enemyHealth.textContent = health.anomalyHealth
+        changeTextButtonRoll()
+        hideRoll()
+        showHealth()
+        button2.addEventListener("click", () => {
+            showRoll()
+            
+        })
+        
+    })
+}
+//DEATHS FUNCTIONS
 
 function deathbyOld() {
     content.textContent = "YOU DIED !!!..off old age..Yawnzz";
@@ -642,15 +681,13 @@ function wonTraining() {
 }
 
 function wonGOW() {
-    content.textContent = "Wow human, your rolls are exceptional, go buy toto now!"
-    button1.style.visibility = "hidden";
-    button2.style.visibility = "hidden";
-    button3.style.visibility = "hidden";
+    content.textContent = "Wow human, your rolls are exceptional, go buy toto now! or vanquish the Anomaly!"
 }
 
 
 // RENDER
 function render() {
+    hideHealth()
     hideRoll()
     changeTextButton()
     buttonClickA()
