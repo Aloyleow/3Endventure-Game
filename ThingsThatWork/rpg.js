@@ -118,10 +118,10 @@ function changeTextButtonKMSlime(){
 
 function changeTextButtonKMDragon(){
     button3.style.visibility = "visible";
+    button2.style.visibility = "hidden";
     button1.style.visibility = "visible";
-    button1.textContent = "Fight a Slime";
-    button2.textContent = "Fight a Dragon!";
-    button3.textContent = "Chill lahhhh";
+    button1.textContent = "Fight the Anomaly!";
+    button3.textContent = "Train with the GOW";
 }
 
 function changeTextButtonTrain(){
@@ -131,6 +131,20 @@ function changeTextButtonTrain(){
     button1.textContent = "Do a Quadrillion push ups!!";
     button2.textContent = "Do a Quadrillion sit ups!!";
     button3.textContent = "Eat a Quadrillion plate of ZAP CAI PENG with neker gen neker gen neker ling curry zi hai you ji dan";
+}
+
+function changeTextButtonAftTrain() {
+    button1.style.visibility = "hidden";
+    button2.style.visibility = "visible";
+    button3.style.visibility = "hidden";
+    button2.textContent = "Fight the anomaly";
+}
+
+function changeTextButtonAftEat() {
+    button1.style.visibility = "hidden";
+    button2.style.visibility = "visible";
+    button3.style.visibility = "hidden";
+    button2.textContent = "Continue Eating";
 }
 
 function changeTextButtonAnomalyKnight(){
@@ -152,6 +166,12 @@ function changeTextButtonRoll(){
     button2.style.visibility = "visible";
     button2.textContent = "ROLL"; 
     button1.style.visibility = "hidden";    
+}
+
+function hideAllButttons() {
+    button1.style.visibility = "hidden";
+    button2.style.visibility = "hidden";
+    button3.style.visibility = "hidden";
 }
 
 
@@ -258,6 +278,7 @@ function buttonKnight() {
             } else {
                 wonDragonKM()
                 changeTextButtonKMDragon()
+                afterDragonKnight()  
             }
             
         })
@@ -292,13 +313,18 @@ function buttonMage() {
     button2.addEventListener("click", () => {
         content.textContent = "BANG! POW! , wait, no, tiu tiu tiu!!!";
         changeTextButtonRoll();
-        if (playerScore <= enemyScore){
-            deathbyDragon();
-        } else {
-            wonDragonKM();
-            changeTextButtonKMDragon();
-        }
-        
+        button2.addEventListener("click", () =>{
+            showRoll();
+            rollScore();
+            if (playerScore <= enemyScore){
+                deathbyDragon();
+            } else {
+                wonDragonKM();
+                changeTextButtonKMDragon();
+                afterDragonMage();
+            }
+        })
+           
     })
     button3.addEventListener("click", () => {
         content.textContent = "Train to shoot";
@@ -372,7 +398,7 @@ function afterSlimeKnight() {
     button3.addEventListener("click", () => {
         content.textContent = "Train to kill";
         hideRoll();
-        changeTextButtonKMtrain();
+        changeTextButtonTrain();
         training();
     })
 
@@ -402,7 +428,7 @@ function afterSlimeMage() {
     button3.addEventListener("click", () => {
         content.textContent = "Train to kill";
         hideRoll();
-        changeTextButtonKMtrain();
+        changeTextButtonTrain()
         training();
     })
 }
@@ -410,7 +436,6 @@ function afterSlimeMage() {
 //AFTER DRAGON BOSS FUNCTION
 
 function afterDragonHuman() {
-    
     button1.addEventListener("click", () =>{
         content.textContent = "Dragon Lord get ready!!!"
         changeTextButtonRoll()
@@ -425,6 +450,38 @@ function afterDragonHuman() {
     })
     button3.addEventListener("click", () =>{
         deathbyOld()
+    })
+
+}
+
+function afterDragonKnight() {
+    button1.addEventListener("click", () =>{
+        content.textContent = "This anamoly is extremly hard please prepare your ching ching ching"
+        changeTextButtonAnomalyMage()
+        hideRoll()
+    })
+
+    button3.addEventListener("click", () => {
+        content.textContent = "Train to kill";
+        hideRoll();
+        changeTextButtonTrain();
+        training();
+    })
+
+}
+
+function afterDragonMage() {
+    button1.addEventListener("click", () =>{
+        content.textContent = "This anamoly is extremly difficult, get your tiu tiu tiu ready"
+        changeTextButtonAnomalyKnight()
+        hideRoll()
+    })
+
+    button3.addEventListener("click", () => {
+        content.textContent = "Train to kill";
+        hideRoll();
+        changeTextButtonTrain();
+        training();
     })
 
 }
@@ -443,42 +500,84 @@ function training() {
                 content.textContent = "1 quadrillion push up";
                 changeTextButtonRoll();
                 rollScore();
-                
+                afterTrainingPU();  
             }
         })
 
     })
     button2.addEventListener("click", () => {
         content.textContent = "1st sit up";
-        changeTextButtonRoll()
+        changeTextButtonRoll();
         button2.addEventListener("click", () => {
-            showRollPlayer()
-            rollScore()
+            showRollPlayer();
+            rollScore();
             if (playerScore <= enemyScore){
                 deathbyTraining();
             } else {   
                 content.textContent = "1 quadrillion sit ups";
                 changeTextButtonRoll();
-                rollScore();             
+                rollScore();
+                afterTrainingSU();
+                            
             }
         })
 
     })
     button3.addEventListener("click", () => {
-        content.textContent = "1st plate...bruh......why this option thoo"
-        changeTextButtonRoll()
+        content.textContent = "1st plate...bruh......why this option thoo";
+        changeTextButtonRoll();
         button2.addEventListener("click", () => {
-            showRollPlayer()
-            rollScore()
+            showRollPlayer();
+            rollScore();
             if (playerScore !== 10){
-                deathbyZCP()
+                deathbyZCP();
             } else {   
-                content.textContent = "errr weelll....you full ?"            
+                content.textContent = "errr weelll....you full ?";
+                changeTextButtonAftEat()
+                contEating();
             }
         })
 
     })
 
+}
+
+function afterTrainingPU() {
+    button2.addEventListener("click", () => {
+        showRollPlayer();
+        rollScore();
+            if (playerScore <= enemyScore){
+                deathbyTraining();
+            } else {
+                content.textContent = "You finished the training !! Your arms are chonky thic...get ready to defeat the anomaly";
+                changeTextButtonAftTrain();
+            }
+
+
+    })
+}
+
+function afterTrainingSU(){
+    button2.addEventListener("click", () => {
+        showRollPlayer();
+        rollScore();
+            if (playerScore <= enemyScore){
+                deathbyTraining();
+            } else {
+                content.textContent = "You finished the training !! Your packs like rock...get ready to defeat the anomaly";
+                changeTextButtonAftTrain();
+            }
+
+
+    })
+}
+
+function contEating() {
+    button2.addEventListener("click", () =>{
+        content.textContent = "You basically ate up the anomaly......saving the universe ??";
+        hideAllButttons();
+        hideRoll();
+    })
 }
 //DEATHS FUNCTION
 
