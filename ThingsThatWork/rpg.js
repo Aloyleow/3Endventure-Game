@@ -91,6 +91,15 @@ function rollScore(){
     enemyRoll.textContent = enemyScore;
 
 }
+function rollScoreAnomaly(){
+    playerScore = rng();
+    enemyScore = rng();
+    playerRoll.textContent = playerScore;
+    enemyRoll.textContent = enemyScore;
+    health.playerHealthHuman = health.playerHealthHuman - enemyScore
+    health.anomalyHealth = health.anomalyHealth - enemyScore
+
+}
 
 //change of button contents 
 function changeTextButton(){
@@ -613,6 +622,21 @@ function anomaly() {
         showHealth()
         button2.addEventListener("click", () => {
             showRoll()
+            rollScoreAnomaly()
+            if (playerScore < enemyScore) {
+                content.textContent = "Bro you dying....roll better!!"
+            } else {
+                content.textContent = "SLASH SLASH!!!"
+            }
+            let x = health.playerHealthHuman - enemyScore
+            let y = health.anomalyHealth - playerScore
+
+            playerHealth.textContent = x
+            enemyHealth.textContent = y
+            
+            playerHealth.textContent = x - enemyScore
+            enemyHealth.textContent = y - playerScore
+
             
         })
         
