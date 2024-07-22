@@ -1,5 +1,22 @@
 //State
+const button1 = document.querySelector("#button1");
+const button2 = document.querySelector("#button2");
+const button3 = document.querySelector("#button3");
 
+const humanbutton =document.querySelector("#h");
+const knightbutton = document.querySelector("#k");
+const magebutton = document.querySelector("#m");
+
+const content = document.querySelector("#content");
+
+const playerRoll = document.querySelector(".playerNumber");
+const enemyRoll = document.querySelector(".enemyNumber");
+
+const playerHealth = document.querySelector("#playerHealth");
+const enemyHealth = document.querySelector("#enemyHealth");
+
+let chosenChar = "";
+let fights = "";
 let rpg = {
     charText:[],
     storyText:[],
@@ -22,20 +39,6 @@ let rpg = {
     },
 
 }
-let chosenChar = 0;
-
-const button1 = document.querySelector("#button1");
-const button2 = document.querySelector("#button2");
-const button3 = document.querySelector("#button3");
-
-const content = document.querySelector("#content");
-
-const playerRoll = document.querySelector(".playerNumber");
-const enemyRoll = document.querySelector(".enemyNumber");
-
-const playerHealth = document.querySelector("#playerHealth");
-const enemyHealth = document.querySelector("#enemyHealth");
-
 
 
 //PUSH TEXT FUNCTIONS
@@ -49,8 +52,12 @@ function pushText(){
     rpg.storyText.push("Slash Slaush ? Wad de Slush");
     rpg.storyText.push("no mana or banana ?");
     rpg.storyText.push("just a slime....chill..what you gonna do next ?");
+    rpg.storyText.push("FIGHTTT!! FOR YOUR LIFEEEE");
+    rpg.storyText.push("Slice those chonky thic legs");
+    rpg.storyText.push("BANG! POW! , wait, no, tiu tiu tiu!!!");
 
     rpg.deathText.push("YOU DIED!!!! killed by a slime...lol...noob");
+    rpg.deathText.push("YOU DIED!!!! obviously...dragon leh")
 }
 
 function pushPathSelectButtons() {
@@ -101,22 +108,28 @@ function rng(){
 }
 
 
+
 //BUTTON FUNCTIONS
 
-function charSelectButtons() {
-    button1.textContent = rpg.charSelect[0];
-    button2.textContent = rpg.charSelect[1];
-    button3.textContent = rpg.charSelect[2];
-    button1.addEventListener("click", humanPage);
-    button2.addEventListener("click", knightPage);
-    button3.addEventListener("click", magePage);  
+function charSelectButtons(){
+    humanbutton.textContent = rpg.charSelect[0];
+    knightbutton.textContent = rpg.charSelect[1];
+    magebutton.textContent = rpg.charSelect[2];
+    humanbutton.addEventListener("click", () => { humanPage(); chosenChar = "human";})
+    knightbutton.addEventListener("click", () => {knightPage(); chosenChar = "knight";})
+    magebutton.addEventListener("click", () => {magePage(); chosenChar = "mage";})
+    showCharButtons()
+    hidebottomButtons()
 }
+
+
 
 function humanSelectButtons() {
     button1.textContent = rpg.buttonsEffect.pathSelect[0];
     button2.textContent = rpg.buttonsEffect.pathSelect[1];
-    button3.textContent = rpg.buttonsEffect.pathSelect[3];
+    button3.textContent = rpg.buttonsEffect.pathSelect[4];
     button1.addEventListener("click", fightSlimePage);
+    button2.addEventListener("click", fightDragonPage);
 
 }
 
@@ -124,13 +137,26 @@ function kmSelectButtons() {
     button1.textContent = rpg.buttonsEffect.pathSelect[0];
     button2.textContent = rpg.buttonsEffect.pathSelect[1];
     button3.textContent = rpg.buttonsEffect.pathSelect[2];
-    button1.addEventListener("click", fightSlimePage)
+    button1.addEventListener("click", fightSlimePage);
+    button2.addEventListener("click", fightDragonPage);
 }
 
 function humanSelectButtonsAftSlime() {
     button1.textContent = rpg.buttonsEffect.pathSelect[3];
     button2.textContent = rpg.buttonsEffect.pathSelect[1];
     button3.textContent = rpg.buttonsEffect.pathSelect[5];
+}
+
+function kmSelectButtonsAftSlime() {
+    button1.textContent = rpg.buttonsEffect.pathSelect[6];
+    button2.textContent = rpg.buttonsEffect.pathSelect[1];
+    button3.textContent = rpg.buttonsEffect.pathSelect[2];
+}
+
+function humanSelectButtonsAftDragon() {
+    button1.textContent = rpg.buttonsEffect.pathSelect[6];
+    button2.textContent = rpg.buttonsEffect.pathSelect[1];
+    button3.textContent = rpg.buttonsEffect.pathSelect[2];
 }
 
 function fightPageThings() {
@@ -146,20 +172,11 @@ function fightPageThings() {
         let y = rpg.enemyScore;
         playerRoll.textContent = x
         enemyRoll.textContent = y
-        winCondSlime()
+        if (fights = "slime"){
+            winCondSlime()
+        }    
     })
 
-}
-
-function winCondSlime() {
-    if (rpg.playerScore <= rpg.enemyScore){
-        content.textContent = rpg.deathText[0];
-        button2.style.visibility = "hidden"
-    } else {
-        content.textContent = rpg.storyText[1];
-        humanSelectButtonsAftSlime();
-        showButtons();
-    }
 }
 
 
@@ -172,12 +189,29 @@ function hideScoreHealth() {
     enemyHealth.style.visibility = "hidden";
 }
 
-function showButtons() {
+function showBottomButtons() {
     button1.style.visibility = "visible";
     button2.style.visibility ="visible";
     button3.style.visibility = "visible";
 }
 
+function hidebottomButtons() {
+    button1.style.visibility = "hidden";
+    button2.style.visibility ="hidden";
+    button3.style.visibility = "hidden";
+}
+
+function showCharButtons() {
+    humanbutton.style.visibility = "visible";
+    knightbutton.style.visibility ="visible";
+    magebutton.style.visibility = "visible";
+}
+
+function hideCharButtons() {
+    humanbutton.style.visibility = "hidden";
+    knightbutton.style.visibility ="hidden";
+    magebutton.style.visibility = "hidden";
+}
 
 //PAGE SELECT FUNCTIONS
 
@@ -187,37 +221,109 @@ function charSelectPage(){
 }
 
 function humanPage(){
-    chosenChar = 3;
+    hideCharButtons()
+    showBottomButtons()
     content.textContent = rpg.charText[1];
     humanSelectButtons()
+
 }
 
 function knightPage(){
-    chosenChar = 1;
+    hideCharButtons()
+    showBottomButtons()
     content.textContent = rpg.charText[2];
-    kmSelectButtons();
+    kmSelectButtons();   
 }
 
 function magePage(){
-    chosenChar = 2;
+    hideCharButtons()
+    showBottomButtons()
     content.textContent = rpg.charText[3];
-    kmSelectButtons();
+    kmSelectButtons();  
 }
 
 function fightSlimePage(){
-    if (chosenChar === 0){
+    fights = "slime";
+    fightPageThings();
+    if (chosenChar === "human"){
        content.textContent = rpg.storyText[0];
-       fightPageThings()
-    } else if (chosenChar === 1){
+    } else if (chosenChar === "knight"){
        content.textContent = rpg.storyText[1];
-       fightPageThings()
-    } else if(chosenChar === 2){
+    } else if(chosenChar === "mage"){
        content.textContent = rpg.storyText[2];
-       fightPageThings()
+    }    
+}
+
+function winCondSlime() {
+    if (chosenChar = "human" && rpg.playerScore <= rpg.enemyScore){
+        content.textContent = rpg.deathText[0];
+        button2.style.visibility = "hidden"
+    } 
+    if (chosenChar = "human" && rpg.playerScore > rpg.enemyScore) {
+        content.textContent = rpg.storyText[3];
+        humanSelectButtonsAftSlime();
+        showBottomButtons();
+    }
+    if (chosenChar = "knight" && rpg.playerScore <= rpg.enemyScore){
+        content.textContent = rpg.deathText[0];
+        button2.style.visibility = "hidden"
+    } 
+    if (chosenChar = "knight" && rpg.playerScore > rpg.enemyScore) {
+        content.textContent = rpg.storyText[3];
+        kmSelectButtonsAftSlime()
+        showBottomButtons();
+    }
+    if (chosenChar = "mage" && rpg.playerScore <= rpg.enemyScore){
+        content.textContent = rpg.deathText[0];
+        button2.style.visibility = "hidden"
+    } 
+    if (chosenChar = "mage" && rpg.playerScore > rpg.enemyScore) {
+        content.textContent = rpg.storyText[3];
+        kmSelectButtonsAftSlime()
+        showBottomButtons();
     }
     
+
 }
-console.log(chosenChar);
+
+function fightDragonPage(){
+    fights = "dragon";
+    fightPageThings();
+    if (chosenChar === "human"){
+        content.textContent = rpg.storyText[4];
+     } else if (chosenChar === "knight"){
+        content.textContent = rpg.storyText[5];
+     } else if(chosenChar === "mage"){
+        content.textContent = rpg.storyText[6];
+     }    
+}
+
+function winCondDragon(){
+    if (chosenChar = "human" && rpg.playerScore !== 10){
+        content.textContent = rpg.deathText[1];
+        button2.style.visibility = "hidden"
+    } else if (chosenChar = "human" && rpg.playerScore > rpg.enemyScore) {
+        content.textContent = rpg.storyText[3];
+        humanSelectButtonsAftSlime();
+        showBottomButtons();
+    }
+    if (chosenChar = "knight" && rpg.playerScore <= rpg.enemyScore){
+        content.textContent = rpg.deathText[0];
+        button2.style.visibility = "hidden"
+    } else if (chosenChar = "knight" && rpg.playerScore > rpg.enemyScore) {
+        content.textContent = rpg.storyText[3];
+        kmSelectButtonsAftSlime()
+        showBottomButtons();
+    }
+    if (chosenChar = "mage" && rpg.playerScore <= rpg.enemyScore){
+        content.textContent = rpg.deathText[0];
+        button2.style.visibility = "hidden"
+    } else if (chosenChar = "mage" && rpg.playerScore > rpg.enemyScore) {
+        content.textContent = rpg.storyText[3];
+        kmSelectButtonsAftSlime()
+        showBottomButtons();
+    }
+}
 
 function render(){
     pushCharSelectButtons ();
@@ -225,7 +331,7 @@ function render(){
     pushPathSelectButtons();
     hideScoreHealth();
     charSelectPage();
-
 }
 render();
+
 console.log(button1, button2, button3,);
