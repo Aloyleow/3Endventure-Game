@@ -15,9 +15,10 @@ const enemyRoll = document.querySelector(".enemyNumber");
 const playerHealth = document.querySelector("#playerHealth");
 const enemyHealth = document.querySelector("#enemyHealth");
 
-let chosenChar = "";
-let fights = "";
+
 let rpg = {
+    fights: "",
+    chosenChar: "",
     charText:[],
     storyText:[],
     deathText:[],
@@ -40,8 +41,8 @@ let rpg = {
 
 }
 
-
 //PUSH TEXT FUNCTIONS
+
 function pushText(){
     rpg.charText.push("To be or not to pee, so who you wan to bee");
     rpg.charText.push("HUMAN !!!! What do you wan to do ?");
@@ -55,6 +56,8 @@ function pushText(){
     rpg.storyText.push("FIGHTTT!! FOR YOUR LIFEEEE");
     rpg.storyText.push("Slice those chonky thic legs");
     rpg.storyText.push("BANG! POW! , wait, no, tiu tiu tiu!!!");
+    rpg.storyText.push("WELL DONE human!!!, you practically ascended to dragon lord after getting dragon blood on your face.");
+    rpg.storyText.push("Chonky lizard dieded....What you gonna do next ?");
 
     rpg.deathText.push("YOU DIED!!!! killed by a slime...lol...noob");
     rpg.deathText.push("YOU DIED!!!! obviously...dragon leh")
@@ -82,6 +85,7 @@ function pushCharSelectButtons(){
 }
 
 //RNG FUNCTIONS
+
 function rng(){
     let y = Math.random();
     if (y < 0.1) {
@@ -115,14 +119,12 @@ function charSelectButtons(){
     humanbutton.textContent = rpg.charSelect[0];
     knightbutton.textContent = rpg.charSelect[1];
     magebutton.textContent = rpg.charSelect[2];
-    humanbutton.addEventListener("click", () => { humanPage(); chosenChar = "human";})
-    knightbutton.addEventListener("click", () => {knightPage(); chosenChar = "knight";})
-    magebutton.addEventListener("click", () => {magePage(); chosenChar = "mage";})
+    humanbutton.addEventListener("click", () => { humanPage(); rpg.chosenChar = "human";})
+    knightbutton.addEventListener("click", () => {knightPage(); rpg.chosenChar = "knight";})
+    magebutton.addEventListener("click", () => {magePage(); rpg.chosenChar = "mage";})
     showCharButtons()
     hidebottomButtons()
 }
-
-
 
 function humanSelectButtons() {
     button1.textContent = rpg.buttonsEffect.pathSelect[0];
@@ -130,7 +132,6 @@ function humanSelectButtons() {
     button3.textContent = rpg.buttonsEffect.pathSelect[4];
     button1.addEventListener("click", fightSlimePage);
     button2.addEventListener("click", fightDragonPage);
-
 }
 
 function kmSelectButtons() {
@@ -155,7 +156,6 @@ function kmSelectButtonsAftSlime() {
 
 function humanSelectButtonsAftDragon() {
     button1.textContent = rpg.buttonsEffect.pathSelect[6];
-    button2.textContent = rpg.buttonsEffect.pathSelect[1];
     button3.textContent = rpg.buttonsEffect.pathSelect[2];
 }
 
@@ -166,19 +166,20 @@ function fightPageThings() {
     button3.style.visibility = "hidden";
     button2.textContent = "Roll";
     button2.addEventListener("click", () =>{
+        console.log(rpg.fights);
         rpg.playerScore = rng();
         rpg.enemyScore = rng();
         let x = rpg.playerScore;
         let y = rpg.enemyScore;
         playerRoll.textContent = x
         enemyRoll.textContent = y
-        if (fights = "slime"){
+        if (rpg.fights === "slime"){
             winCondSlime()
+        } else if (rpg.fights === "dragon"){
+            winCondDragon()
         }    
     })
-
 }
-
 
 // DISPLAY FUNCTIONS
 
@@ -192,6 +193,12 @@ function hideScoreHealth() {
 function showBottomButtons() {
     button1.style.visibility = "visible";
     button2.style.visibility ="visible";
+    button3.style.visibility = "visible";
+}
+
+function showBottom2Buttons() {
+    button1.style.visibility = "visible";
+    button2.style.visibility ="hidden";
     button3.style.visibility = "visible";
 }
 
@@ -243,88 +250,95 @@ function magePage(){
 }
 
 function fightSlimePage(){
-    fights = "slime";
+    rpg.fights = "slime";
     fightPageThings();
-    if (chosenChar === "human"){
+    if (rpg.chosenChar === "human"){
        content.textContent = rpg.storyText[0];
-    } else if (chosenChar === "knight"){
+    } else if (rpg.chosenChar === "knight"){
        content.textContent = rpg.storyText[1];
-    } else if(chosenChar === "mage"){
-       content.textContent = rpg.storyText[2];
+    } else if(rpg.chosenChar === "mage"){
+       content.textContent = rpg.storyText[2];  
     }    
 }
 
 function winCondSlime() {
-    if (chosenChar = "human" && rpg.playerScore <= rpg.enemyScore){
-        content.textContent = rpg.deathText[0];
-        button2.style.visibility = "hidden"
-    } 
-    if (chosenChar = "human" && rpg.playerScore > rpg.enemyScore) {
-        content.textContent = rpg.storyText[3];
-        humanSelectButtonsAftSlime();
-        showBottomButtons();
+    if (rpg.chosenChar === "human"){
+        if (rpg.playerScore <= rpg.enemyScore){
+            content.textContent = rpg.deathText[1];
+            button2.style.visibility = "hidden"
+        } else {
+            content.textContent = rpg.storyText[3];
+            humanSelectButtonsAftSlime();
+            showBottomButtons();
+        }
     }
-    if (chosenChar = "knight" && rpg.playerScore <= rpg.enemyScore){
-        content.textContent = rpg.deathText[0];
-        button2.style.visibility = "hidden"
-    } 
-    if (chosenChar = "knight" && rpg.playerScore > rpg.enemyScore) {
-        content.textContent = rpg.storyText[3];
-        kmSelectButtonsAftSlime()
-        showBottomButtons();
+    if (rpg.chosenChar === "knight"){
+        if (rpg.playerScore <= rpg.enemyScore){
+            content.textContent = rpg.deathText[0];
+            button2.style.visibility = "hidden"
+        } else {
+            content.textContent = rpg.storyText[3];
+            kmSelectButtonsAftSlime();
+            showBottomButtons();
+        }
     }
-    if (chosenChar = "mage" && rpg.playerScore <= rpg.enemyScore){
-        content.textContent = rpg.deathText[0];
-        button2.style.visibility = "hidden"
-    } 
-    if (chosenChar = "mage" && rpg.playerScore > rpg.enemyScore) {
-        content.textContent = rpg.storyText[3];
-        kmSelectButtonsAftSlime()
-        showBottomButtons();
+    if (rpg.chosenChar === "mage"){
+        if (rpg.playerScore <= rpg.enemyScore){
+            content.textContent = rpg.deathText[0];
+            button2.style.visibility = "hidden"
+        } else {
+            content.textContent = rpg.storyText[3];
+            kmSelectButtonsAftSlime();
+            showBottomButtons();
+        }
     }
-    
-
 }
 
 function fightDragonPage(){
-    fights = "dragon";
+    rpg.fights = "dragon";
     fightPageThings();
-    if (chosenChar === "human"){
+    if (rpg.chosenChar === "human"){
         content.textContent = rpg.storyText[4];
-     } else if (chosenChar === "knight"){
+     } else if (rpg.chosenChar === "knight"){
         content.textContent = rpg.storyText[5];
-     } else if(chosenChar === "mage"){
+     } else if(rpg.chosenChar === "mage"){
         content.textContent = rpg.storyText[6];
      }    
 }
 
 function winCondDragon(){
-    if (chosenChar = "human" && rpg.playerScore !== 10){
-        content.textContent = rpg.deathText[1];
-        button2.style.visibility = "hidden"
-    } else if (chosenChar = "human" && rpg.playerScore > rpg.enemyScore) {
-        content.textContent = rpg.storyText[3];
-        humanSelectButtonsAftSlime();
-        showBottomButtons();
+    if (rpg.chosenChar === "human"){
+        if (rpg.playerScore === 10){
+            content.textContent = rpg.deathText[1];
+            button2.style.visibility = "hidden"
+        } else {
+            content.textContent = rpg.storyText[7];
+            humanSelectButtonsAftDragon();
+            showBottom2Buttons()
+        }
     }
-    if (chosenChar = "knight" && rpg.playerScore <= rpg.enemyScore){
-        content.textContent = rpg.deathText[0];
-        button2.style.visibility = "hidden"
-    } else if (chosenChar = "knight" && rpg.playerScore > rpg.enemyScore) {
-        content.textContent = rpg.storyText[3];
-        kmSelectButtonsAftSlime()
-        showBottomButtons();
+    if (rpg.chosenChar === "knight"){
+        if (rpg.playerScore <= rpg.enemyScore){
+            content.textContent = rpg.deathText[1];
+            button2.style.visibility = "hidden"
+        } else {
+            content.textContent = rpg.storyText[8];
+            
+            showBottomButtons();
+        }
     }
-    if (chosenChar = "mage" && rpg.playerScore <= rpg.enemyScore){
-        content.textContent = rpg.deathText[0];
-        button2.style.visibility = "hidden"
-    } else if (chosenChar = "mage" && rpg.playerScore > rpg.enemyScore) {
-        content.textContent = rpg.storyText[3];
-        kmSelectButtonsAftSlime()
-        showBottomButtons();
+    if (rpg.chosenChar === "mage"){
+        if (rpg.playerScore <= rpg.enemyScore){
+            content.textContent = rpg.deathText[1];
+            button2.style.visibility = "hidden"
+        } else {
+            content.textContent = rpg.storyText[8];
+            
+            showBottomButtons();
+        }
+  
     }
 }
-
 function render(){
     pushCharSelectButtons ();
     pushText();
