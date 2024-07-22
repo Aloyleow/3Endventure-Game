@@ -1,18 +1,5 @@
 //State
-const button1 = document.querySelector("#button1");
-const button2 = document.querySelector("#button2");
-const button3 = document.querySelector("#button3");
 
-const content = document.querySelector("#content");
-
-const playerRoll = document.querySelector(".playerNumber");
-const enemyRoll = document.querySelector(".enemyNumber");
-
-const playerHealth = document.querySelector("#playerHealth");
-const enemyHealth = document.querySelector("#enemyHealth");
-
-let charSelect = []
-let char ;
 let rpg = {
     charText:[],
     storyText:[],
@@ -22,6 +9,7 @@ let rpg = {
         pathSelect: [],
         roll: [],
     },
+    charSelect: [],
     numberRoll: [1,2,3,4,5,6,7,8,9,10],
     playerScore: [],
     enemyScore:[],
@@ -34,6 +22,22 @@ let rpg = {
     },
 
 }
+let chosenChar = 0;
+
+const button1 = document.querySelector("#button1");
+const button2 = document.querySelector("#button2");
+const button3 = document.querySelector("#button3");
+
+const content = document.querySelector("#content");
+
+const playerRoll = document.querySelector(".playerNumber");
+const enemyRoll = document.querySelector(".enemyNumber");
+
+const playerHealth = document.querySelector("#playerHealth");
+const enemyHealth = document.querySelector("#enemyHealth");
+
+
+
 //PUSH TEXT FUNCTIONS
 function pushText(){
     rpg.charText.push("To be or not to pee, so who you wan to bee");
@@ -63,12 +67,11 @@ function pushPathSelectButtons() {
 }
 
 function pushCharSelectButtons(){  
-    charSelect.push(
+    rpg.charSelect.push(
         "Human",
         "Knight!",
         "Mage"
-    )
-    
+    )   
 }
 
 //RNG FUNCTIONS
@@ -99,15 +102,14 @@ function rng(){
 
 
 //BUTTON FUNCTIONS
+
 function charSelectButtons() {
-    button1.textContent = charSelect[0];
-    button2.textContent = charSelect[1];
-    button3.textContent = charSelect[2];
-    button1.addEventListener("onclick", () =>
-        {humanPage);
-    button2.addEventListener("onclick", knightPage);
-    button3.addEventListener("onclick", magePage);
-    
+    button1.textContent = rpg.charSelect[0];
+    button2.textContent = rpg.charSelect[1];
+    button3.textContent = rpg.charSelect[2];
+    button1.addEventListener("click", humanPage);
+    button2.addEventListener("click", knightPage);
+    button3.addEventListener("click", magePage);  
 }
 
 function humanSelectButtons() {
@@ -150,25 +152,14 @@ function fightPageThings() {
 }
 
 function winCondSlime() {
-    if (char === 0) {
-        if(rpg.playerScore <= rpg.enemyScore){
-            content.textContent = rpg.deathText[0];
-            button2.style.visibility = "hidden"
-
-        } else {
-            content.textContent = rpg.storyText[1];
-            humanSelectButtonsAftSlime();
-            showButtons();
-        }
+    if (rpg.playerScore <= rpg.enemyScore){
+        content.textContent = rpg.deathText[0];
+        button2.style.visibility = "hidden"
+    } else {
+        content.textContent = rpg.storyText[1];
+        humanSelectButtonsAftSlime();
+        showButtons();
     }
-    // if(rpg.playerScore <= rpg.enemyScore){
-    //     content.textContent = rpg.deathText[0];
-    //     button2.style.visibility = "hidden";
-    // } else {
-    //     content.textContent = rpg.storyText[1];
-    //     humanSelectButtonsAftSlime();
-    //     showButtons();
-    // }
 }
 
 
@@ -196,35 +187,37 @@ function charSelectPage(){
 }
 
 function humanPage(){
+    chosenChar = 3;
     content.textContent = rpg.charText[1];
     humanSelectButtons()
 }
 
 function knightPage(){
+    chosenChar = 1;
     content.textContent = rpg.charText[2];
     kmSelectButtons();
 }
 
 function magePage(){
+    chosenChar = 2;
     content.textContent = rpg.charText[3];
     kmSelectButtons();
 }
 
 function fightSlimePage(){
-    if (char === 0){
+    if (chosenChar === 0){
        content.textContent = rpg.storyText[0];
        fightPageThings()
-    } else if (char === 1){
+    } else if (chosenChar === 1){
        content.textContent = rpg.storyText[1];
        fightPageThings()
-    } else if (char === 2){
+    } else if(chosenChar === 2){
        content.textContent = rpg.storyText[2];
        fightPageThings()
     }
     
 }
-
-
+console.log(chosenChar);
 
 function render(){
     pushCharSelectButtons ();
