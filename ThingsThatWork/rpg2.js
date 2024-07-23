@@ -17,25 +17,27 @@ const enemyHealth = document.querySelector("#enemyHealth");
 
 
 let rpg = {
+    chosenChar: "",
+
     slimeFight: false,
     dragonFight: false,
     humanDeathbyChilling: false,
     trainingPU:false,
     trainingSU: false,
     trainingEat: false,
-    chosenChar: "",
+    
+    charSelect: [],
     charText:[],
     storyText:[],
     deathText:[],
     buttonsEffect: {
-        trainingSelect: [],
         pathSelect: [],
-        roll: [],
     },
-    charSelect: [],
+
     numberRoll: [1,2,3,4,5,6,7,8,9,10],
     playerScore: [],
     enemyScore:[],
+    
     health: {
         anomalyHealth: 50,
         playerHealthHuman: 35,
@@ -133,7 +135,7 @@ function rng(){
 
 
 
-//BUTTON FUNCTIONS
+//================================================ BUTTON FUNCTIONS================================================ 
 
 function charSelectButtons(){
     humanbutton.textContent = rpg.charSelect[0];
@@ -215,42 +217,8 @@ function trainGowButtons() {
     })
 }
 
-function fightPageThings() {
-    playerScore = 0;
-    enemyScore = 0;
-    playerRoll.style.visibility = "visible";
-    enemyRoll.style.visibility = "visible";
-    button1.style.visibility = "hidden";
-    button3.style.visibility = "hidden";
-    button2.textContent = "Roll";
-    button2.addEventListener("click", () =>{
-        rpg.playerScore = rng();
-        rpg.enemyScore = rng();
-        let x = rpg.playerScore;
-        let y = rpg.enemyScore;
-        playerRoll.textContent = x
-        enemyRoll.textContent = y
-        if (rpg.slimeFight === true){
-            winCondSlime()
-            rpg.slimeFight = false;
-        } else if (rpg.dragonFight === true){
-            winCondDragon()
-            rpg.dragonFight = false;
-        } else if (rpg.trainingPU === true){
-            trainWinConPU()
-            rpg.trainingPU = false;
-        } else if (rpg.trainingSU === true){
-            trainWinConSU()
-            rpg.trainingSU = false;
-        } else if (rpg.trainingEat === true){
-            trainWinConEat()
-            rpg.trainingEat = false;
-        }
-             
-    })
-}
 
-// DISPLAY FUNCTIONS
+// ================================================ DISPLAY FUNCTIONS================================================ 
 
 function hideScoreHealth() {
     playerRoll.style.visibility = "hidden";
@@ -294,7 +262,43 @@ function hideCharButtons() {
     magebutton.style.visibility = "hidden";
 }
 
-//PAGE SELECT FUNCTIONS
+// FIGHT FUNCTION 
+function fightPageThings() {
+    playerScore = 0;
+    enemyScore = 0;
+    playerRoll.style.visibility = "visible";
+    enemyRoll.style.visibility = "visible";
+    button1.style.visibility = "hidden";
+    button3.style.visibility = "hidden";
+    button2.textContent = "Roll";
+    button2.addEventListener("click", () =>{
+        rpg.playerScore = rng();
+        rpg.enemyScore = rng();
+        let x = rpg.playerScore;
+        let y = rpg.enemyScore;
+        playerRoll.textContent = x
+        enemyRoll.textContent = y
+        if (rpg.slimeFight === true){
+            winCondSlime()
+            rpg.slimeFight = false;
+        } else if (rpg.dragonFight === true){
+            winCondDragon()
+            rpg.dragonFight = false;
+        } else if (rpg.trainingPU === true){
+            trainWinConPU()
+            rpg.trainingPU = false;
+        } else if (rpg.trainingSU === true){
+            trainWinConSU()
+            rpg.trainingSU = false;
+        } else if (rpg.trainingEat === true){
+            trainWinConEat()
+            rpg.trainingEat = false;
+        }
+             
+    })
+}
+
+//================================================ PAGE SELECT FUNCTIONS================================================ 
 
 function charSelectPage(){
     content.textContent = rpg.charText[0];
@@ -322,6 +326,8 @@ function magePage(){
     content.textContent = rpg.charText[3];
     kmSelectButtons();  
 }
+
+// ================================================ SLIME FUNCTION================================================ 
 
 function fightSlimePage(){
     rpg.slimeFight = true;
@@ -368,6 +374,8 @@ function winCondSlime() {
     }
 }
 
+//================================================ DRAGON FUNCTION================================================ 
+
 function fightDragonPage(){
     rpg.dragonFight = true;
     fightPageThings();
@@ -413,6 +421,8 @@ function winCondDragon(){
   
     }
 }
+
+//================================================ TRAINING FUNCTION================================================ 
 
 function trainGowPage() {
     content.textContent = rpg.storyText[9];
@@ -492,14 +502,15 @@ function trainWinConEat(){
     // }
     
 
-
+//================================================ DEATH FUNCTION================================================ 
 
 function deathPage() {
     if (rpg.humanDeathbyChilling === true){
         content.textContent = rpg.deathText[2];
         hidebottomButtons()
     }
-    
+ 
+ // RENDER   
 }
 function render(){
     pushCharSelectButtons ();
