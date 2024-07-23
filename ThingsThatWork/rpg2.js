@@ -22,6 +22,7 @@ let rpg = {
     humanDeathbyChilling: false,
     trainingPU:false,
     trainingSU: false,
+    trainingEat: false,
     chosenChar: "",
     charText:[],
     storyText:[],
@@ -65,11 +66,16 @@ function pushText(){
     rpg.storyText.push("Train to kill!!");
     rpg.storyText.push("WOW chonky thihck muscles");
     rpg.storyText.push("1 quadrillion push up");
+    rpg.storyText.push("1st plate...bruh......why this option thoo");
+    rpg.storyText.push("errr weelll....you full ?");
+    rpg.storyText.push("1 quadrillion sit ups");
 
     rpg.deathText.push("YOU DIED!!!! killed by a slime...lol...noob");
     rpg.deathText.push("YOU DIED!!!! obviously...dragon leh");
     rpg.deathText.push("YOU DIED !!!..off old age..Yawnzz");
     rpg.deathText.push("YOU DIED!!!! err.....you weak lor");
+    rpg.deathText.push("YOU DIED!!!! yeaaaaaaa i mean thats alot of rice");
+
 }
 
 function pushPathSelectButtons() {
@@ -182,6 +188,7 @@ function humanSelectButtonsAftDragon() {
 function kmSelectButtonsAftDragon() {
     button1.textContent = rpg.buttonsEffect.pathSelect[6];
     button3.textContent = rpg.buttonsEffect.pathSelect[2];
+    button3.addEventListener("click", trainGowPage);
 }
 
 function trainGowButtons() {
@@ -190,11 +197,27 @@ function trainGowButtons() {
     button3.textContent = rpg.buttonsEffect.pathSelect[11];
     button1.addEventListener("click", () => {
         rpg.trainingPU = true;
-        trainGowPage2()
+        rpg.trainingSU = false;
+        rpg.trainingEat = false;
+        trainGowPage2();
+    })
+    button2.addEventListener("click", () => {
+        rpg.trainingSU = true;
+        rpg.trainingPU = false;
+        rpg.trainingEat = false;
+        trainGowPage2();
+    })
+    button3.addEventListener("click", () => {
+        rpg.trainingEat = true;
+        rpg.trainingPU = false;
+        rpg.trainingSU = false;
+        trainGowPage2();
     })
 }
 
 function fightPageThings() {
+    playerScore = 0;
+    enemyScore = 0;
     playerRoll.style.visibility = "visible";
     enemyRoll.style.visibility = "visible";
     button1.style.visibility = "hidden";
@@ -209,10 +232,19 @@ function fightPageThings() {
         enemyRoll.textContent = y
         if (rpg.slimeFight === true){
             winCondSlime()
+            rpg.slimeFight = false;
         } else if (rpg.dragonFight === true){
             winCondDragon()
+            rpg.dragonFight = false;
         } else if (rpg.trainingPU === true){
-            trainWinCon()
+            trainWinConPU()
+            rpg.trainingPU = false;
+        } else if (rpg.trainingSU === true){
+            trainWinConSU()
+            rpg.trainingSU = false;
+        } else if (rpg.trainingEat === true){
+            trainWinConEat()
+            rpg.trainingEat = false;
         }
              
     })
@@ -225,6 +257,11 @@ function hideScoreHealth() {
     playerHealth.style.visibility = "hidden";
     enemyRoll.style.visibility = "hidden";
     enemyHealth.style.visibility = "hidden";
+}
+
+function hideRollScore() {
+    playerRoll.style.visibility = "hidden";
+    enemyRoll.style.visibility = "hidden";
 }
 
 function showBottomButtons() {
@@ -265,23 +302,23 @@ function charSelectPage(){
 }
 
 function humanPage(){
-    hideCharButtons()
-    showBottomButtons()
+    hideCharButtons();
+    showBottomButtons();
     content.textContent = rpg.charText[1];
     humanSelectButtons()
 
 }
 
 function knightPage(){
-    hideCharButtons()
-    showBottomButtons()
+    hideCharButtons();
+    showBottomButtons();
     content.textContent = rpg.charText[2];
     kmSelectButtons();   
 }
 
 function magePage(){
-    hideCharButtons()
-    showBottomButtons()
+    hideCharButtons();
+    showBottomButtons();
     content.textContent = rpg.charText[3];
     kmSelectButtons();  
 }
@@ -301,7 +338,7 @@ function fightSlimePage(){
 function winCondSlime() {
     if (rpg.chosenChar === "human"){
         if (rpg.playerScore <= rpg.enemyScore){
-            content.textContent = rpg.deathText[1];
+            content.textContent = rpg.deathText[0];
             button2.style.visibility = "hidden"
         } else {
             content.textContent = rpg.storyText[3];
@@ -351,7 +388,7 @@ function winCondDragon(){
         } else {
             content.textContent = rpg.storyText[7];
             humanSelectButtonsAftDragon();
-            showBottomButtons()
+            showBottomButtons();
         }
     }
     if (rpg.chosenChar === "knight"){
@@ -360,7 +397,7 @@ function winCondDragon(){
             button2.style.visibility = "hidden"
         } else {
             content.textContent = rpg.storyText[8];
-            kmSelectButtonsAftDragon()
+            kmSelectButtonsAftDragon();
             showBottom2Buttons();
         }
     }
@@ -370,7 +407,7 @@ function winCondDragon(){
             button2.style.visibility = "hidden"
         } else {
             content.textContent = rpg.storyText[8];
-            kmSelectButtonsAftDragon()
+            kmSelectButtonsAftDragon();
             showBottom2Buttons();
         }
   
@@ -379,35 +416,63 @@ function winCondDragon(){
 
 function trainGowPage() {
     content.textContent = rpg.storyText[9];
-    trainGowButtons()
+    hideRollScore();
+    trainGowButtons();
+    showBottomButtons();
 
 }
 
 function trainGowPage2() {
-    content.textContent = rpg.storyText[11]
+    hideRollScore();
+    if (rpg.trainingPU === true){
+        content.textContent = rpg.storyText[11];
+    } else if (rpg.trainingSU === true){
+        content.textContent = rpg.storyText[14];
+    } else if (rpg.trainingEat === true){
+        content.textContent = rpg.storyText[12];
+    }
+    rpg.slimeFight = false
+    rpg.dragonFight = false
     fightPageThings();
 }
 
-function trainWinCon(){
-    
-    if (rpg.playerScore <= rpg.enemyScore){
+function trainWinConPU(){
+    if (rpg.playerScore <= rpg.enemyScore) {
         content.textContent = rpg.deathText[3];
         button2.style.visibility = "hidden"
     } else {
         content.textContent = rpg.storyText[10];
     }
 }
-    
-    
+
+function trainWinConSU(){
+    if (rpg.playerScore <= rpg.enemyScore){
+        content.textContent = rpg.deathText[3];
+        button2.style.visibility = "hidden"
+    } else {
+        content.textContent = rpg.storyText[10];   
+    }
+}
+
+function trainWinConEat(){
+    if (rpg.playerScore !== 10){
+        content.textContent = rpg.deathText[4];
+        button2.style.visibility = "hidden"
+    } else {
+        content.textContent = rpg.storyText[13];           
+    }
+
+}
     // if (rpg.trainingPU === true) {
     //     if (rpg.playerScore <= rpg.enemyScore){
     //         content.textContent = rpg.deathText[3];
     //         button2.style.visibility = "hidden"
     //     } else {
     //         content.textContent = rpg.storyText[10];
+    //     }
     // }
 
-    // if (rpg.chosenChar === "human"){
+    // if (rpg.trainingSU === true){
     //     if (rpg.playerScore <= rpg.enemyScore){
     //         content.textContent = rpg.deathText[3];
     //         button2.style.visibility = "hidden"
@@ -416,25 +481,16 @@ function trainWinCon(){
             
     //     }
     // }
-    // if (rpg.chosenChar === "knight"){
-    //     if (rpg.playerScore <= rpg.enemyScore){
-    //         content.textContent = rpg.deathText[3];
+    // if (rpg.trainingEat === true){
+    //     if (rpg.playerScore !== 10){
+    //         content.textContent = rpg.deathText[4];
     //         button2.style.visibility = "hidden"
     //     } else {
-    //         content.textContent = rpg.storyText[10];
+    //         content.textContent = rpg.storyText[13];
           
     //     }
     // }
-    // if (rpg.chosenChar === "mage"){
-    //     if (rpg.playerScore <= rpg.enemyScore){
-    //         content.textContent = rpg.deathText[3];
-    //         button2.style.visibility = "hidden"
-    //     } else {
-    //         content.textContent = rpg.storyText[10];
-            
-    //     }
-  
-    // }
+    
 
 
 
