@@ -18,7 +18,6 @@ const enemyHealthDisplay = document.querySelector("#enemyHealth");
 let rpg = {
     chosenChar: "",
 
-    firstFight: false,
     secondFight: false,
     thirdFight: false,
     bossFight: false,
@@ -43,7 +42,7 @@ let rpg = {
 let rpgfightSystem = {
     numberRoll: [1,2,3,4,5,6,7,8,9,10],
     playerScore: [],
-    enemyScore:[],
+    enemyScore: [],
     
     health: {
         anomalyHealth: 50,
@@ -52,6 +51,39 @@ let rpgfightSystem = {
         playerHealthaftTrain: 50,
         playerHealthGOW: 100,
     } 
+}
+function rng(){
+    let y = Math.random();
+    if (y < 0.1) {
+        return rpgfightSystem.numberRoll[0]; 
+    } else if (y < 0.2) {
+        return rpgfightSystem.numberRoll[1];
+    } else if (y < 0.3) {
+        return rpgfightSystem.numberRoll[2];
+    } else if (y < 0.4) {
+        return rpgfightSystem.numberRoll[3];
+    } else if (y < 0.5) {
+        return rpgfightSystem.numberRoll[4];
+    } else if (y < 0.6) {
+        return rpgfightSystem.numberRoll[5];
+    } else if (y < 0.7) {
+        return rpgfightSystem.numberRoll[6];
+    } else if (y < 0.8) {
+        return rpgfightSystem.numberRoll[7];
+    } else if (y < 0.9) {
+        return rpgfightSystem.numberRoll[8];
+    } else if (y <= 1) {
+        return rpgfightSystem.numberRoll[9];
+    }   
+}
+
+function fightSystem(){
+    button2.addEventListener("click", () =>{
+        rpgfightSystem.playerScore = rng();
+        rpgfightSystem.enemyScore = rng();
+        playerRollDisplay.textContent = rpgfightSystem.playerScore;
+        enemyRollDisplay.textContent = rpgfightSystem.enemyScore;
+    })
 }
 
 function pushCharText(){
@@ -115,12 +147,14 @@ function humanPageButtons(){
     button1.textContent = rpg.buttonsEffect.pathSelect[0];
     button2.textContent = rpg.buttonsEffect.pathSelect[1];
     button3.textContent = rpg.buttonsEffect.pathSelect[4];
+    button1.addEventListener("click", () => {rpg.slimeFight = true; slimeBossfightPage()})
 }
 
 function kmPageButtons(){
     button1.textContent = rpg.buttonsEffect.pathSelect[0];
     button2.textContent = rpg.buttonsEffect.pathSelect[1];
     button3.textContent = rpg.buttonsEffect.pathSelect[2];
+    button1.addEventListener("click", () => {rpg.slimeFight = true; slimeBossfightPage()})
 }
 //================================================1st page Character Select================================================
 
@@ -154,9 +188,27 @@ function afterCharSelectPage(){
     }
 }
 
-//================================================3rd page fights and divergence starts================================================
+//================================================fights and divergence starts================================================
 //set truths
 
+function slimeBossfightPage(){
+    onlyShowRollButton()
+    showScore()
+    if (rpg.chosenChar === "human"){
+        content.textContent = rpg.storyText[0];
+        
+    } else if (rpg.chosenChar === "knight"){
+        content.textContent = rpg.storyText[1];
+        
+    } else if (rpg.chosenChar === "mage"){
+        content.textContent = rpg.storyText[2];    
+    }
+    fightSystem()
+}
+
+function slimeBossWinCond(){
+    
+}
 
 //================================================ Buttons Visibility ================================================
 function hideScoreAndHealth() {
@@ -192,6 +244,13 @@ function showBottomButtons() {
 function hidebottomButtons() {
     button1.style.visibility = "hidden";
     button2.style.visibility ="hidden";
+    button3.style.visibility = "hidden";
+}
+
+function onlyShowRollButton() {
+    button2.textContent = rpg.buttonsEffect.pathSelect[7];
+    button1.style.visibility = "hidden";
+    button2.style.visibility ="visible";
     button3.style.visibility = "hidden";
 }
 
