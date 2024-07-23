@@ -17,7 +17,11 @@ const enemyHealth = document.querySelector("#enemyHealth");
 
 
 let rpg = {
-    fights: "",
+    slimeFight: false,
+    dragonFight: false,
+    humanDeathbyChilling: false,
+    trainingPU:false,
+    trainingSU: false,
     chosenChar: "",
     charText:[],
     storyText:[],
@@ -58,9 +62,14 @@ function pushText(){
     rpg.storyText.push("BANG! POW! , wait, no, tiu tiu tiu!!!");
     rpg.storyText.push("WELL DONE human!!!, you practically ascended to dragon lord after getting dragon blood on your face.");
     rpg.storyText.push("Chonky lizard dieded....What you gonna do next ?");
+    rpg.storyText.push("Train to kill!!");
+    rpg.storyText.push("WOW chonky thihck muscles");
+    rpg.storyText.push("1 quadrillion push up");
 
     rpg.deathText.push("YOU DIED!!!! killed by a slime...lol...noob");
-    rpg.deathText.push("YOU DIED!!!! obviously...dragon leh")
+    rpg.deathText.push("YOU DIED!!!! obviously...dragon leh");
+    rpg.deathText.push("YOU DIED !!!..off old age..Yawnzz");
+    rpg.deathText.push("YOU DIED!!!! err.....you weak lor");
 }
 
 function pushPathSelectButtons() {
@@ -72,7 +81,11 @@ function pushPathSelectButtons() {
         "Chill...",
         "Chill lahh....",
         "Fight Anomaly",
-        "Roll"
+        "Roll",
+        "Chill lahh...with a teh ping",
+        "Do a Quadrillion push ups!!",
+        "Do a Quadrillion sit ups!!",
+         "Eat a Quadrillion plate of ZAP CAI PENG with neker gen neker gen neker ling curry zi hai you ji dan"
     )
 }
 
@@ -83,6 +96,7 @@ function pushCharSelectButtons(){
         "Mage"
     )   
 }
+
 
 //RNG FUNCTIONS
 
@@ -132,6 +146,10 @@ function humanSelectButtons() {
     button3.textContent = rpg.buttonsEffect.pathSelect[4];
     button1.addEventListener("click", fightSlimePage);
     button2.addEventListener("click", fightDragonPage);
+    button3.addEventListener("click", () => {
+        rpg.humanDeathbyChilling = true;
+        deathPage()
+    });
 }
 
 function kmSelectButtons() {
@@ -140,6 +158,7 @@ function kmSelectButtons() {
     button3.textContent = rpg.buttonsEffect.pathSelect[2];
     button1.addEventListener("click", fightSlimePage);
     button2.addEventListener("click", fightDragonPage);
+    button3.addEventListener("click", trainGowPage);
 }
 
 function humanSelectButtonsAftSlime() {
@@ -156,7 +175,23 @@ function kmSelectButtonsAftSlime() {
 
 function humanSelectButtonsAftDragon() {
     button1.textContent = rpg.buttonsEffect.pathSelect[6];
+    button2.textContent = rpg.buttonsEffect.pathSelect[3];
+    button3.textContent = rpg.buttonsEffect.pathSelect[8];
+}
+
+function kmSelectButtonsAftDragon() {
+    button1.textContent = rpg.buttonsEffect.pathSelect[6];
     button3.textContent = rpg.buttonsEffect.pathSelect[2];
+}
+
+function trainGowButtons() {
+    button1.textContent = rpg.buttonsEffect.pathSelect[9];
+    button2.textContent = rpg.buttonsEffect.pathSelect[10];
+    button3.textContent = rpg.buttonsEffect.pathSelect[11];
+    button1.addEventListener("click", () => {
+        rpg.trainingPU = true;
+        trainGowPage2()
+    })
 }
 
 function fightPageThings() {
@@ -166,18 +201,20 @@ function fightPageThings() {
     button3.style.visibility = "hidden";
     button2.textContent = "Roll";
     button2.addEventListener("click", () =>{
-        console.log(rpg.fights);
         rpg.playerScore = rng();
         rpg.enemyScore = rng();
         let x = rpg.playerScore;
         let y = rpg.enemyScore;
         playerRoll.textContent = x
         enemyRoll.textContent = y
-        if (rpg.fights === "slime"){
+        if (rpg.slimeFight === true){
             winCondSlime()
-        } else if (rpg.fights === "dragon"){
+        } else if (rpg.dragonFight === true){
             winCondDragon()
-        }    
+        } else if (rpg.trainingPU === true){
+            trainWinCon()
+        }
+             
     })
 }
 
@@ -250,7 +287,7 @@ function magePage(){
 }
 
 function fightSlimePage(){
-    rpg.fights = "slime";
+    rpg.slimeFight = true;
     fightPageThings();
     if (rpg.chosenChar === "human"){
        content.textContent = rpg.storyText[0];
@@ -295,7 +332,7 @@ function winCondSlime() {
 }
 
 function fightDragonPage(){
-    rpg.fights = "dragon";
+    rpg.dragonFight = true;
     fightPageThings();
     if (rpg.chosenChar === "human"){
         content.textContent = rpg.storyText[4];
@@ -308,13 +345,13 @@ function fightDragonPage(){
 
 function winCondDragon(){
     if (rpg.chosenChar === "human"){
-        if (rpg.playerScore === 10){
+        if (rpg.playerScore !== 10){
             content.textContent = rpg.deathText[1];
             button2.style.visibility = "hidden"
         } else {
             content.textContent = rpg.storyText[7];
             humanSelectButtonsAftDragon();
-            showBottom2Buttons()
+            showBottomButtons()
         }
     }
     if (rpg.chosenChar === "knight"){
@@ -323,8 +360,8 @@ function winCondDragon(){
             button2.style.visibility = "hidden"
         } else {
             content.textContent = rpg.storyText[8];
-            
-            showBottomButtons();
+            kmSelectButtonsAftDragon()
+            showBottom2Buttons();
         }
     }
     if (rpg.chosenChar === "mage"){
@@ -333,11 +370,80 @@ function winCondDragon(){
             button2.style.visibility = "hidden"
         } else {
             content.textContent = rpg.storyText[8];
-            
-            showBottomButtons();
+            kmSelectButtonsAftDragon()
+            showBottom2Buttons();
         }
   
     }
+}
+
+function trainGowPage() {
+    content.textContent = rpg.storyText[9];
+    trainGowButtons()
+
+}
+
+function trainGowPage2() {
+    content.textContent = rpg.storyText[11]
+    fightPageThings();
+}
+
+function trainWinCon(){
+    
+    if (rpg.playerScore <= rpg.enemyScore){
+        content.textContent = rpg.deathText[3];
+        button2.style.visibility = "hidden"
+    } else {
+        content.textContent = rpg.storyText[10];
+    }
+}
+    
+    
+    // if (rpg.trainingPU === true) {
+    //     if (rpg.playerScore <= rpg.enemyScore){
+    //         content.textContent = rpg.deathText[3];
+    //         button2.style.visibility = "hidden"
+    //     } else {
+    //         content.textContent = rpg.storyText[10];
+    // }
+
+    // if (rpg.chosenChar === "human"){
+    //     if (rpg.playerScore <= rpg.enemyScore){
+    //         content.textContent = rpg.deathText[3];
+    //         button2.style.visibility = "hidden"
+    //     } else {
+    //         content.textContent = rpg.storyText[10];
+            
+    //     }
+    // }
+    // if (rpg.chosenChar === "knight"){
+    //     if (rpg.playerScore <= rpg.enemyScore){
+    //         content.textContent = rpg.deathText[3];
+    //         button2.style.visibility = "hidden"
+    //     } else {
+    //         content.textContent = rpg.storyText[10];
+          
+    //     }
+    // }
+    // if (rpg.chosenChar === "mage"){
+    //     if (rpg.playerScore <= rpg.enemyScore){
+    //         content.textContent = rpg.deathText[3];
+    //         button2.style.visibility = "hidden"
+    //     } else {
+    //         content.textContent = rpg.storyText[10];
+            
+    //     }
+  
+    // }
+
+
+
+function deathPage() {
+    if (rpg.humanDeathbyChilling === true){
+        content.textContent = rpg.deathText[2];
+        hidebottomButtons()
+    }
+    
 }
 function render(){
     pushCharSelectButtons ();
