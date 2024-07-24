@@ -28,6 +28,7 @@ let rpg = {
     trainingPU:false,
     trainingSU: false,
     trainingEat: false,
+    gowFight:false,
     
     charSelect: [],
     charText:[],
@@ -107,16 +108,19 @@ function pushStoryContent(){
     rpg.storyText.push("11Train to kill!!");
     rpg.storyText.push("12WOW chonky thihck muscles");
     rpg.storyText.push("1 quadrillion push up13");
-    rpg.storyText.push("1st plate...bruh......why this option thoo");
-    rpg.storyText.push("errr weelll....you full ?");
-    rpg.storyText.push("1 quadrillion sit ups");
+    rpg.storyText.push("1st plate...bruh......why this option thoo14");
+    rpg.storyText.push("errr weelll....you full ?15");
+    rpg.storyText.push("1 quadrillion sit ups16");
+    rpg.storyText.push("17After killing the slime you feel like a sigma ? ok lorr you try");
+    rpg.storyText.push("18Well...this wasnt supposed to happen...but now go  and KILL the ANOMALY with your attained powers!")
 
     rpg.deathText.push("0YOU DIED!!!! killed by a slime...lol...noob");
     rpg.deathText.push("1YOU DIED!!!! obviously...dragon leh");
     rpg.deathText.push("2YOU DIED!!!! your next journey will be through the dragons other end =)")
     rpg.deathText.push("3YOU DIED !!!..off old age..Yawnzz");
-    rpg.deathText.push("YOU DIED!!!! err.....you weak lor");
-    rpg.deathText.push("YOU DIED!!!! yeaaaaaaa i mean thats alot of rice");
+    rpg.deathText.push("4YOU DIED!!!! err.....you weak lor");
+    rpg.deathText.push("5YOU DIED!!!! yeaaaaaaa i mean thats alot of rice");
+    rpg.deathText.push("6YOU DIED!!!! ah fight a god lahh....orbigood");
 
 }
 
@@ -139,6 +143,7 @@ function pushPathSelectButtons() {
 
 function fightSystem(){
     button2.addEventListener("click", () =>{
+        showScore()
         rpgfightSystem.playerScore = rng();
         rpgfightSystem.enemyScore = rng();
         playerRollDisplay.textContent = rpgfightSystem.playerScore;
@@ -147,41 +152,80 @@ function fightSystem(){
             slimeBossWinCond()
         } else if (rpg.dragonFight === true){
             dragonBossWinCond()
-        }
+        } else if (rpg.gowFight === true){
+            gowWinCon()
+        } else{
+            trainWinCond()
+        } 
                
     })
 }
+function reloadPageButton(){
 
+}
 function humanPageButtons(){
     button1.textContent = rpg.buttonsEffect.pathSelect[0];
     button2.textContent = rpg.buttonsEffect.pathSelect[1];
     button3.textContent = rpg.buttonsEffect.pathSelect[4];
-    button1.addEventListener("click", () => {rpg.slimeFight = true; slimeBossFightPage()})
-    button2.addEventListener("click", () => {rpg.dragonFight =true; dragonBossFightPage()})
-    button3.addEventListener("click", instantDeath)
+    button1.addEventListener("click", slimeBossFightPage);
+    button2.addEventListener("click", dragonBossFightPage);
+    button3.addEventListener("click", instantDeath);
 }
 
 function kmPageButtons(){
     button1.textContent = rpg.buttonsEffect.pathSelect[0];
     button2.textContent = rpg.buttonsEffect.pathSelect[1];
     button3.textContent = rpg.buttonsEffect.pathSelect[2];
-    button1.addEventListener("click", () => {rpg.slimeFight = true; slimeBossFightPage()})
-    button2.addEventListener("click", () => {rpg.dragonFight =true; dragonBossFightPage()})
-    button3.addEventListener("click", trainWithGowButtons)
+    button1.addEventListener("click", slimeBossFightPage);
+    button2.addEventListener("click", dragonBossFightPage);
+    button3.addEventListener("click", trainWithGowButtons);
 }
 
-function trainWithGowButtons(){
+function removeKmPageButtons(){  
+    button1.removeEventListener("click", slimeBossFightPage);
+    button2.removeEventListener("click", dragonBossFightPage);
+    button3.removeEventListener("click", instantDeath);
+}
+
+function trainWithGowButtons(){  
+    removeKmPageButtons();
+    
     content.textContent = rpg.storyText[11]
     button1.textContent = rpg.buttonsEffect.pathSelect[9];
     button2.textContent = rpg.buttonsEffect.pathSelect[10];
     button3.textContent = rpg.buttonsEffect.pathSelect[11];
-    button1.addEventListener("click", () => {
-        rpg.trainingPU = true;
-        rpg.slimeFight = false;
-        rpg.dragonFight = false; 
-        trainWithGowPage()
-    } )
 
+    button1.addEventListener("click", trainPuPage);
+    button2.addEventListener("click", trainSuPage);
+    button3.addEventListener("click", trainEatPage);
+}
+
+function removetrainWithGowButtons(){
+    button1.removeEventListener("click", trainPuPage);
+    button2.removeEventListener("click", trainSuPage);
+    button3.removeEventListener("click", trainEatPage);
+}
+
+function humanPageButtonsAftSlime(){
+    removeKmPageButtons();
+    showBottomButtons()
+    button1.textContent = rpg.buttonsEffect.pathSelect[3];
+    button2.textContent = rpg.buttonsEffect.pathSelect[1];
+    button3.textContent = rpg.buttonsEffect.pathSelect[8];
+    button1.addEventListener("click", fightGowPage);
+    button2.addEventListener("click", dragonBossFightPage);
+    button3.addEventListener("click", instantDeath);
+
+}
+
+function kmPageButtonsAftSlime(){
+    removeKmPageButtons()
+    button1.textContent = rpg.buttonsEffect.pathSelect[6];
+    button2.textContent = rpg.buttonsEffect.pathSelect[1]
+    button3.textContent = rpg.buttonsEffect.pathSelect[2];
+    button1.addEventListener
+    button2.addEventListener("click", dragonBossFightPage)
+    button3.addEventListener
 }
 //================================================1st page Character Select================================================
 
@@ -222,62 +266,70 @@ function afterCharSelectPage(){
 //
 
 function slimeBossFightPage(){
-    if (rpg.slimeFight === true && rpg.trainingPU === false){
-        onlyShowRollButton()
-        showScore()
-        if (rpg.chosenChar === "human"){
-            content.textContent = rpg.storyText[0];
-        
-        } else if (rpg.chosenChar === "knight"){
-            content.textContent = rpg.storyText[1];
-        
-        } else if (rpg.chosenChar === "mage"){
-            content.textContent = rpg.storyText[2];    
-        }
-        fightSystem()
-        console.log("WRTONG!")
-    }  
+    rpg.slimeFight = true;
+    onlyShowRollButton()
+    if (rpg.chosenChar === "human"){
+        content.textContent = rpg.storyText[0];
+    
+    } else if (rpg.chosenChar === "knight"){
+        content.textContent = rpg.storyText[1];
+    
+    } else if (rpg.chosenChar === "mage"){
+        content.textContent = rpg.storyText[2];    
+    }
+    fightSystem()
+          
 }
 // remember false slime
 function slimeBossWinCond(){
     if (rpg.chosenChar === "human"){
         if (rpgfightSystem.playerScore > rpgfightSystem.enemyScore) {
             content.textContent = rpg.storyText[3];
+            humanPageButtonsAftSlime()
+            rpg.slimeFight = false;
         } else {
             content.textContent = rpg.deathText[0];
+            replayButton()
         }        
     } else if (rpg.chosenChar === "knight"){
         if (rpgfightSystem.playerScore > rpgfightSystem.enemyScore) {
             content.textContent = rpg.storyText[4];
+            kmPageButtonsAftSlime()
+            showBottomButtons()
+            rpg.slimeFight = false;
         } else {
             content.textContent = rpg.deathText[0];
+            replayButton()
         }             
     } else if (rpg.chosenChar === "mage"){
         if (rpgfightSystem.playerScore > rpgfightSystem.enemyScore) {
             content.textContent = rpg.storyText[5];
+            kmPageButtonsAftSlime()
+            showBottomButtons()
+            rpg.slimeFight = false;
         } else {
             content.textContent = rpg.deathText[0];
+            replayButton()
         }     
     }
 
 }
 // remember set false
 function dragonBossFightPage(){
-    if (rpg.dragonFight === true){
-        onlyShowRollButton();
-        showScore();
-        if (rpg.chosenChar === "human") {
-            content.textContent = rpg.storyText[6];
+    rpg.dragonFight =true 
+    onlyShowRollButton();
+    hideScore()
+    if (rpg.chosenChar === "human") {
+        content.textContent = rpg.storyText[6];
 
-        } else if (rpg.chosenChar === "knight") {
-            content.textContent = rpg.storyText[7];
+    } else if (rpg.chosenChar === "knight") {
+        content.textContent = rpg.storyText[7];
 
-        } else if (rpg.chosenChar === "mage") {
-            content.textContent = rpg.storyText[8];
-        }
-        fightSystem();
+    } else if (rpg.chosenChar === "mage") {
+        content.textContent = rpg.storyText[8];
     }
-}
+    fightSystem();
+}   
     
 
 function dragonBossWinCond(){
@@ -286,27 +338,89 @@ function dragonBossWinCond(){
             content.textContent = rpg.storyText[9];
         } else {
             content.textContent = rpg.deathText[1];
+            replayButton()
         }        
     } else if (rpg.chosenChar === "knight"){
         if (rpgfightSystem.playerScore > rpgfightSystem.enemyScore) {
             content.textContent = rpg.storyText[10];
         } else {
             content.textContent = rpg.deathText[2];
+            replayButton()
         }             
     } else if (rpg.chosenChar === "mage"){
         if (rpgfightSystem.playerScore > rpgfightSystem.enemyScore) {
             content.textContent = rpg.storyText[10];
         } else {
             content.textContent = rpg.deathText[2];
+            replayButton()
         }
     }
 }
 
+function fightGowPage(){
+    gowFight = true;
+    rpg.textContent = rpg.storyText[17];
+    fightSystem()
+}
+
+function gowWinCon(){
+    if (rpgfightSystem.playerScore === 10){
+        content.textContent = rpg.storyText[18];
+    } else {
+        content.textContent = rpg.deathText[6];
+    }
+}
+
 //================================================ training page after choosing train type================================================
-//slime fight and maybe dragon fights becomes true cause considered 3rd page so have to off it
-function trainWithGowPage(){
+
+function trainPuPage(){
+    rpg.trainingPU = true;
+    removetrainWithGowButtons()
+    onlyShowRollButton();
+    content.textContent = rpg.storyText[13]
+
+    fightSystem();
+}
+function trainSuPage(){
+    rpg.trainingSU = true;
+    removetrainWithGowButtons()
+    onlyShowRollButton();
+    content.textContent = rpg.storyText[16]
+
+    fightSystem();
+}
+
+function trainEatPage(){
+    rpg.trainingEat = true;
+    removetrainWithGowButtons()
+    onlyShowRollButton();
+    content.textContent = rpg.storyText[14]
+
+    fightSystem();
+}
+
+function trainWinCond(){
     if (rpg.trainingPU === true){
-        content.textContent = rpg.storyText[13]
+        if(rpgfightSystem.playerScore > rpgfightSystem.enemyScore){
+            content.textContent = rpg.storyText[12]
+        }else{
+            content.textContent = rpg.deathText[4];
+            replayButton()
+        }
+    } else if (rpg.trainingSU === true){
+        if(rpgfightSystem.playerScore > rpgfightSystem.enemyScore){
+            content.textContent = rpg.storyText[12]
+        }else{
+            content.textContent = rpg.deathText[4];
+            replayButton()
+        }
+    } else if (rpg.trainingEat === true){
+        if(rpgfightSystem.playerScore === 10){
+            content.textContent = rpg.storyText[15]
+        }else{
+            content.textContent = rpg.deathText[5];
+            replayButton()
+        }
     }
 }
 
@@ -354,10 +468,17 @@ function onlyShowRollButton() {
     button3.style.visibility = "hidden";
 }
 
+function replayButton(){
+    hidebottomButtons()
+    knightbutton.style.visibility ="visible"
+    knightbutton.textContent = "try again ~~~"
+    knightbutton.addEventListener("click", () => {history.go(0)})
+}
+
 //================================================instant death functions================================================
 function instantDeath(){
-    hidebottomButtons()
     content.textContent = rpg.deathText[3];
+    replayButton()
 }
 
 function render(){
