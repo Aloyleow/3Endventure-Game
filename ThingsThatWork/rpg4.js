@@ -6,6 +6,7 @@ const humanbutton =document.querySelector("#h");
 const knightbutton = document.querySelector("#k");
 const magebutton = document.querySelector("#m");
 
+const header =document.querySelector("#header");
 const content = document.querySelector("#content");
 
 const playerRollDisplay = document.querySelector(".playerNumber");
@@ -74,7 +75,7 @@ function rng(){
 }
 
 function pushCharText(){
-    rpg.charText.push("To be or not to pee, so who you wan to bee");
+    rpg.charText.push("To be or not to pee, so who you wan to bee ?");
     rpg.charText.push("HUMAN !!!! What do you wan to do ?");
     rpg.charText.push("KNIGHT !!! what you wanna slay ?");
     rpg.charText.push("MAGE !!! tiu tiu tiu...")    
@@ -224,7 +225,7 @@ function charSelectButtons(){
 //================================================2nd page Choose your way================================================
 
 function afterCharSelectPage(){
-
+    header.textContent = "";
     hideCharSelectButtons();
     showBottomButtons();
     if (rpg.chosenChar === "human"){
