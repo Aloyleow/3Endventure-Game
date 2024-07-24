@@ -160,55 +160,47 @@ function fightSystem(){
                
     })
 }
-function reloadPageButton(){
 
-}
 function humanPageButtons(){
     button1.textContent = rpg.buttonsEffect.pathSelect[0];
     button2.textContent = rpg.buttonsEffect.pathSelect[1];
     button3.textContent = rpg.buttonsEffect.pathSelect[4];
-    button1.addEventListener("click", slimeBossFightPage);
-    button2.addEventListener("click", dragonBossFightPage);
-    button3.addEventListener("click", instantDeath);
+    button1.addEventListener("click", slimeBossFightPage, {once : true});
+    button2.addEventListener("click", dragonBossFightPage, {once : true});
+    button3.addEventListener("click", instantDeath, {once : true});
 }
 
 function kmPageButtons(){
     button1.textContent = rpg.buttonsEffect.pathSelect[0];
     button2.textContent = rpg.buttonsEffect.pathSelect[1];
     button3.textContent = rpg.buttonsEffect.pathSelect[2];
-    button1.addEventListener("click", slimeBossFightPage);
-    button2.addEventListener("click", dragonBossFightPage);
-    button3.addEventListener("click", trainWithGowButtons);
-}
-
-function removeKmPageButtons(){  
-    button1.removeEventListener("click", slimeBossFightPage);
-    button2.removeEventListener("click", dragonBossFightPage);
-    button3.removeEventListener("click", instantDeath);
+    button1.addEventListener("click", slimeBossFightPage, {once : true});
+    button2.addEventListener("click", dragonBossFightPage, {once : true});
+    button3.addEventListener("click", trainWithGowButtons, {once : true});
 }
 
 function trainWithGowButtons(){  
-    removeKmPageButtons();
     
     content.textContent = rpg.storyText[11]
     button1.textContent = rpg.buttonsEffect.pathSelect[9];
     button2.textContent = rpg.buttonsEffect.pathSelect[10];
     button3.textContent = rpg.buttonsEffect.pathSelect[11];
-
-    button1.addEventListener("click", trainPuPage);
-    button2.addEventListener("click", trainSuPage);
-    button3.addEventListener("click", trainEatPage);
+    button1.addEventListener("click", () => {
+        rpg.trainingPU = true;
+        trainPuPage()
+    }, {once : true})
+    button2.addEventListener("click", () => {
+        rpg.trainingSU = true;
+        trainSuPage()
+    }, {once : true});
+    button3.addEventListener("click", () => {
+        rpg.trainingEat = true;
+        trainEatPage()
+    }, {once : true});
 }
 
-function removetrainWithGowButtons(){
-    button1.removeEventListener("click", trainPuPage);
-    button2.removeEventListener("click", trainSuPage);
-    button3.removeEventListener("click", trainEatPage);
-}
 
 function humanPageButtonsAftSlime(){
-    removeKmPageButtons();
-    showBottomButtons()
     button1.textContent = rpg.buttonsEffect.pathSelect[3];
     button2.textContent = rpg.buttonsEffect.pathSelect[1];
     button3.textContent = rpg.buttonsEffect.pathSelect[8];
@@ -219,7 +211,6 @@ function humanPageButtonsAftSlime(){
 }
 
 function kmPageButtonsAftSlime(){
-    removeKmPageButtons()
     button1.textContent = rpg.buttonsEffect.pathSelect[6];
     button2.textContent = rpg.buttonsEffect.pathSelect[1]
     button3.textContent = rpg.buttonsEffect.pathSelect[2];
@@ -285,6 +276,7 @@ function slimeBossWinCond(){
     if (rpg.chosenChar === "human"){
         if (rpgfightSystem.playerScore > rpgfightSystem.enemyScore) {
             content.textContent = rpg.storyText[3];
+            showBottomButtons()
             humanPageButtonsAftSlime()
             rpg.slimeFight = false;
         } else {
@@ -373,30 +365,8 @@ function gowWinCon(){
 
 //================================================ training page after choosing train type================================================
 
-function trainPuPage(){
-    rpg.trainingPU = true;
-    removetrainWithGowButtons()
-    onlyShowRollButton();
-    content.textContent = rpg.storyText[13]
-
-    fightSystem();
-}
-function trainSuPage(){
-    rpg.trainingSU = true;
-    removetrainWithGowButtons()
-    onlyShowRollButton();
-    content.textContent = rpg.storyText[16]
-
-    fightSystem();
-}
-
-function trainEatPage(){
-    rpg.trainingEat = true;
-    removetrainWithGowButtons()
-    onlyShowRollButton();
-    content.textContent = rpg.storyText[14]
-
-    fightSystem();
+function trainPage(){
+    
 }
 
 function trainWinCond(){
