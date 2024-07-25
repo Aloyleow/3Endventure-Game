@@ -27,28 +27,28 @@ header {
 
 .enemyNumber {
     display: grid;
-    height: 120px;
-    font-size: 80px;
+    height: 60px;
+    font-size: 60px;
     text-align: right;
 }
 
 #enemyHealth {
-    height: 120px;
-    font-size: 80px;
+    height: 60px;
+    font-size: 60px;
     color: red;
     text-align: right;
 }
 
 .playerNumber {
     display: grid;
-    height: 120px;
-    font-size: 80px;
+    height: 60px;
+    font-size: 60px;
     text-align: left;
 }
 
 #playerHealth {
-    height: 120px;
-    font-size: 80px;
+    height: 60px;
+    font-size: 60px;
     color: red;
 }
 
@@ -58,18 +58,29 @@ header {
     justify-content: space-around; 
 }
 
+img {
+    height: 200px;
+    
+}
+
+#enemyimage {
+   height: 300px;
+}
+
+
+
 footer{
     background-color: rgb(0, 236, 253);
     display: flex;
-    height: 180px;
+    height: 120px;
     justify-content: space-around;
     align-items: center;
     
 }
 
 button{ 
-    height: 140px;
-    width: 140px;
+    height: 110px;
+    width: 110px;
     font-size: 20px;
     background-color: blanchedalmond;
 }

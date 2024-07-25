@@ -8,6 +8,8 @@ const magebutton = document.querySelector("#m");
 
 const header =document.querySelector("#header");
 const content = document.querySelector("#content");
+const playerimage = document.querySelector("#playerimage");
+const enemyimage = document.querySelector("#enemyimage");
 
 const playerRollDisplay = document.querySelector(".playerNumber");
 const enemyRollDisplay = document.querySelector(".enemyNumber");
@@ -181,7 +183,7 @@ function removeKmPageButtons(){
 
 function trainWithGowButtons(){  
     removeKmPageButtons();
-    
+    enemyimage.src = "images/gow.png"
     content.textContent = rpg.storyText[11]
     button1.textContent = rpg.buttonsEffect.pathSelect[9];
     button2.textContent = rpg.buttonsEffect.pathSelect[10];
@@ -226,14 +228,17 @@ function afterCharSelectPage(){
     hideCharSelectButtons();
     showBottomButtons();
     if (rpg.chosenChar === "human"){
+        playerimage.src = "images/human.png"
         header.textContent = rpg.charSelect[0];
         content.textContent = rpg.charText[1];
         humanPageButtons();
     } else if (rpg.chosenChar === "knight"){
+        playerimage.src = "images/knight.png"
         header.textContent = rpg.charSelect[1];
         content.textContent = rpg.charText[2];
         kmPageButtons()
     } else if (rpg.chosenChar === "mage"){
+        playerimage.src = "images/mage.png"
         header.textContent = rpg.charSelect[2];
         content.textContent = rpg.charText[3];
         kmPageButtons()
@@ -246,6 +251,7 @@ function afterCharSelectPage(){
 
 function slimeBossFightPage(){
     rpg.slimeFight = true;
+    enemyimage.src = "images/slime.png"
     onlyShowRollButton()
     if (rpg.chosenChar === "human"){
         content.textContent = rpg.storyText[0];
@@ -296,6 +302,7 @@ function slimeBossWinCond(){
 }
 // remember set false
 function dragonBossFightPage(){ 
+    enemyimage.src = "images/evildragon.png"
     rpg.dragonFight =true
     onlyShowRollButton();
     hideScore()
