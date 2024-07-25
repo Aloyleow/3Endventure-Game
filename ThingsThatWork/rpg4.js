@@ -452,7 +452,7 @@ function trainWinCond(){
             
         }
     } else if (rpg.trainingEat === true){
-        if(rpgfightSystem.playerScore === 10){
+        if(rpgfightSystem.playerScore !== 10){
             content.textContent = rpg.storyText[15]
             replayButtonWinByEating()
             
