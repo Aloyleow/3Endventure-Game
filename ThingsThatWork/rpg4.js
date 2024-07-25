@@ -25,7 +25,6 @@ let rpg = {
     trainingPU:false,
     trainingSU: false,
     trainingEat: false,
-    gowFight:false,
     
     charSelect: [],
     charText:[],
@@ -44,9 +43,7 @@ let rpgfightSystem = {
     
     health: {
         anomalyHealth: 50,
-        playerHealthHuman: 35,
-        playerHealthKnight: 45,
-        playerHealthMAge: 40
+        playerHealth: 45,
     } 
 }
 function rng(){
@@ -225,16 +222,19 @@ function charSelectButtons(){
 //================================================2nd page Choose your way================================================
 
 function afterCharSelectPage(){
-    header.textContent = "";
+    
     hideCharSelectButtons();
     showBottomButtons();
     if (rpg.chosenChar === "human"){
+        header.textContent = rpg.charSelect[0];
         content.textContent = rpg.charText[1];
         humanPageButtons();
     } else if (rpg.chosenChar === "knight"){
+        header.textContent = rpg.charSelect[1];
         content.textContent = rpg.charText[2];
         kmPageButtons()
     } else if (rpg.chosenChar === "mage"){
+        header.textContent = rpg.charSelect[2];
         content.textContent = rpg.charText[3];
         kmPageButtons()
     }
@@ -356,16 +356,16 @@ function anomalyFightPage(){
     anomalyButtonDisplay();
     button2.textContent = rpg.buttonsEffect.pathSelect[12];
     button2.addEventListener("click", () =>{
-        playerRollDisplay.textContent = 0;
-        enemyRollDisplay.textContent = 0;
-        playerHealthDisplay.textContent = rpgfightSystem.health.playerHealthKnight
+        // playerRollDisplay.textContent = 0;
+        // enemyRollDisplay.textContent = 0;
+        hideScore()
+        playerHealthDisplay.textContent = rpgfightSystem.health.playerHealth
         enemyHealthDisplay.textContent = rpgfightSystem.health.anomalyHealth
         playerHealthDisplay.style.visibility = "visible";
         enemyHealthDisplay.style.visibility = "visible";
         content.textContent = rpg.storyText[18]
         button2.textContent = rpg.buttonsEffect.pathSelect[7];
-        rpgfightSystem.playerScore = rng()
-        rpgfightSystem.enemyScore = rng()
+        
         anomalyfightSystem()
        })
        
@@ -376,7 +376,7 @@ function charHealth() {
     if (rpg.chosenChar === "human"){        
         playerHealthDisplay.textContent = rpgfightSystem.health.playerHealthHuman
     }else if (rpg.chosenChar === "knight"){
-        playerHealthDisplay.textContent = rpgfightSystem.health.playerHealthKnight
+        playerHealthDisplay.textContent = rpgfightSystem.health.playerHealth
     }else if (rpg.chosenChar === "mage"){
         playerHealthDisplay.textContent = rpgfightSystem.health.playerHealthMAge
     }
@@ -385,18 +385,19 @@ function charHealth() {
 
 function anomalyfightSystem(){
     button2.addEventListener("click", () =>{
-        
+        showScore()
+        rpgfightSystem.playerScore = rng()
+        rpgfightSystem.enemyScore = rng()
         playerRollDisplay.textContent = rpgfightSystem.playerScore;
         enemyRollDisplay.textContent = rpgfightSystem.enemyScore;
-        
         rpgfightSystem.health.anomalyHealth = rpgfightSystem.health.anomalyHealth - rpgfightSystem.playerScore
-        rpgfightSystem.health.playerHealthKnight = rpgfightSystem.health.playerHealthKnight - rpgfightSystem.enemyScore
+        rpgfightSystem.health.playerHealth = rpgfightSystem.health.playerHealth - rpgfightSystem.enemyScore
 
-        if (rpgfightSystem.health.anomalyHealth <= 0 && rpgfightSystem.health.anomalyHealth <= rpgfightSystem.health.playerHealthKnight){
+        if (rpgfightSystem.health.anomalyHealth <= 0 && rpgfightSystem.health.anomalyHealth <= rpgfightSystem.health.playerHealth){
             replayButtonWin()
             hideScoreAndHealth()
             content.textContent = rpg.storyText[9];
-        } else if (rpgfightSystem.health.playerHealthKnight <= 0 && rpgfightSystem.health.playerHealthKnight <= rpgfightSystem.health.anomalyHealth){
+        } else if (rpgfightSystem.health.playerHealth <= 0 && rpgfightSystem.health.playerHealth <= rpgfightSystem.health.anomalyHealth){
             replayButton()
             hideScoreAndHealth()
             content.textContent =rpg.deathText[6];
