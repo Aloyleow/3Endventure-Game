@@ -184,8 +184,8 @@ function removeKmPageButtons(){
 
 function trainWithGowButtons(){  
     removeKmPageButtons();
-    enemyimage.src = "Images/gow.png"
-    enemyimage.alt = "gow"
+    enemyimage.src = "Images/Gow.png"
+    enemyimage.alt = "Gow"
     content.textContent = rpg.storyText[11]
     button1.textContent = rpg.buttonsEffect.pathSelect[9];
     button2.textContent = rpg.buttonsEffect.pathSelect[10];
