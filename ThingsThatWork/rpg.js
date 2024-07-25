@@ -4,6 +4,7 @@
 // 1st variable what page ? or what option chosen ? tag a number of the path chosen in an array []
 // 2nd variable
 const numberRoll= [1,2,3,4,5,6,7,8,9,10]
+const mana =[]
 const health = {
     anomalyHealth: 50,
     playerHealthHuman: 35,
