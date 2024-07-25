@@ -266,9 +266,7 @@ function slimeBossWinCond(){
         if (rpgfightSystem.playerScore > rpgfightSystem.enemyScore) {
             content.textContent = rpg.storyText[3];
             anomalyFightPage()
-            
-           
-            
+                       
         } else {
             content.textContent = rpg.deathText[0];
             replayButton();
