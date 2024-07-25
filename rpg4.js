@@ -236,8 +236,8 @@ function afterCharSelectPage(){
         content.textContent = rpg.charText[1];
         humanPageButtons();
     } else if (rpg.chosenChar === "knight"){
-        playerimage.src = "Images/knight.png"
-        playerimage.alt = "knight"
+        playerimage.src = "Images/Knight.png"
+        playerimage.alt = "Knight"
         header.textContent = rpg.charSelect[1];
         content.textContent = rpg.charText[2];
         kmPageButtons()
@@ -381,8 +381,8 @@ function anomalyFightPage(){
     anomalyButtonDisplay();
     button2.textContent = rpg.buttonsEffect.pathSelect[12];
     button2.addEventListener("click", () =>{
-        enemyimage.src = "Images/anomaly.png";
-        enemyimage.alt = "anomaly";
+        enemyimage.src = "Images/Anomaly.png";
+        enemyimage.alt = "Anomaly";
         hideScore()
         playerHealthDisplay.textContent = rpgfightSystem.health.playerHealth
         enemyHealthDisplay.textContent = rpgfightSystem.health.anomalyHealth
@@ -534,8 +534,8 @@ function anomalyButtonDisplay(){
 }
 
 function replayButtonWin(){
-    enemyimage.src = "Images/anomalydead.png"
-    enemyimage.alt = "anomalydead"
+    enemyimage.src = "Images/Anomalydead.png"
+    enemyimage.alt = "Anomalydead"
     hidebottomButtons()
     knightbutton.style.visibility ="visible"
     knightbutton.textContent = "Time for Lunch ?"
