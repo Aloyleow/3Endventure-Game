@@ -115,7 +115,7 @@ function pushStoryContent(){
     rpg.deathText.push("YOU DIED !!!..off old age..Yawnzz");
     rpg.deathText.push("YOU DIED!!!! your muscle spasm until you died.......");
     rpg.deathText.push("YOU DIED!!!! yeaaaaaaa i mean thats alot of rice");
-    rpg.deathText.push("YOU DIED!!!! who's gonna save the world now ??!! ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+    rpg.deathText.push("YOU DIED!!!! who's gonna save the world now ??!! ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
 
 }
 
@@ -153,6 +153,7 @@ function fightSystemSet(){
     
 }
 function fightSystem(){
+    removeKmPageButtons();
     button2.addEventListener("click", fightSystemSet);               
 }
 
@@ -184,6 +185,7 @@ function removeKmPageButtons(){
 function trainWithGowButtons(){  
     removeKmPageButtons();
     enemyimage.src = "images/gow.png"
+    enemyimage.alt = "gow"
     content.textContent = rpg.storyText[11]
     button1.textContent = rpg.buttonsEffect.pathSelect[9];
     button2.textContent = rpg.buttonsEffect.pathSelect[10];
@@ -229,16 +231,19 @@ function afterCharSelectPage(){
     showBottomButtons();
     if (rpg.chosenChar === "human"){
         playerimage.src = "images/human.png"
+        playerimage.alt = "human"
         header.textContent = rpg.charSelect[0];
         content.textContent = rpg.charText[1];
         humanPageButtons();
     } else if (rpg.chosenChar === "knight"){
         playerimage.src = "images/knight.png"
+        playerimage.alt = "knight"
         header.textContent = rpg.charSelect[1];
         content.textContent = rpg.charText[2];
         kmPageButtons()
     } else if (rpg.chosenChar === "mage"){
         playerimage.src = "images/mage.png"
+        playerimage.alt = "mage"
         header.textContent = rpg.charSelect[2];
         content.textContent = rpg.charText[3];
         kmPageButtons()
@@ -252,6 +257,7 @@ function afterCharSelectPage(){
 function slimeBossFightPage(){
     rpg.slimeFight = true;
     enemyimage.src = "images/slime.png"
+    enemyimage.alt = "slime"
     onlyShowRollButton()
     if (rpg.chosenChar === "human"){
         content.textContent = rpg.storyText[0];
@@ -272,30 +278,38 @@ function slimeBossWinCond(){
         if (rpgfightSystem.playerScore > rpgfightSystem.enemyScore) {
             content.textContent = rpg.storyText[3];
             anomalyFightPage()
-                       
+            enemyimage.src = "images/slimedead.png"
+            enemyimage.alt = "slimedead"           
         } else {
             content.textContent = rpg.deathText[0];
             replayButton();
+            removeKmPageButtons();
+            playerimage.src = "images/humandead.png"
+            playerimage.alt = "humandead"
         }        
     } else if (rpg.chosenChar === "knight"){
         if (rpgfightSystem.playerScore > rpgfightSystem.enemyScore) {
             content.textContent = rpg.storyText[4];
             anomalyFightPage()
-            
-            
+            enemyimage.src = "images/slimedead.png"
+            enemyimage.alt = "slimedead"            
         } else {
             content.textContent = rpg.deathText[0];
             replayButton();
+            playerimage.src = "images/knightdead.png"
+            playerimage.alt = "knightdead"
         }             
     } else if (rpg.chosenChar === "mage"){
         if (rpgfightSystem.playerScore > rpgfightSystem.enemyScore) {
             content.textContent = rpg.storyText[5];
             anomalyFightPage()
-            
-            
+            enemyimage.src = "images/slimedead.png"
+            enemyimage.alt = "slimedead"           
         } else {
             content.textContent = rpg.deathText[0];
             replayButton();
+            playerimage.src = "images/magedead.png"
+            playerimage.alt = "magedead"
         }     
     }
 
@@ -303,6 +317,7 @@ function slimeBossWinCond(){
 // remember set false
 function dragonBossFightPage(){ 
     enemyimage.src = "images/evildragon.png"
+    enemyimage.alt = "evildragon"
     rpg.dragonFight =true
     onlyShowRollButton();
     hideScore()
@@ -322,34 +337,39 @@ function dragonBossFightPage(){
 function dragonBossWinCond(){
     if (rpg.chosenChar === "human"){
         if (rpgfightSystem.playerScore === 10) {
-            content.textContent = rpg.storyText[9];
+            content.textContent = rpg.storyText[10];
             anomalyFightPage();
-            
-            
+            enemyimage.src = "images/evildragondead.png"
+            enemyimage.alt = "evildragondead"    
         } else {
             content.textContent = rpg.deathText[1];
             replayButton();
-            
+            playerimage.src = "images/humandead.png"
+            playerimage.alt = "humandead"
         }        
     } else if (rpg.chosenChar === "knight"){
         if (rpgfightSystem.playerScore > rpgfightSystem.enemyScore) {
             content.textContent = rpg.storyText[10];
             anomalyFightPage();
-            
-            
+            enemyimage.src = "images/evildragondead.png"
+            enemyimage.alt = "evildragondead"
         } else {
             content.textContent = rpg.deathText[2];
             replayButton()
+            playerimage.src = "images/knightdead.png"
+            playerimage.alt = "knightdead"
         }             
     } else if (rpg.chosenChar === "mage"){
         if (rpgfightSystem.playerScore > rpgfightSystem.enemyScore) {
             content.textContent = rpg.storyText[10];
             anomalyFightPage()
-            
-            
+            enemyimage.src = "images/evildragondead.png"
+            enemyimage.alt = "evildragondead"         
         } else {
             content.textContent = rpg.deathText[2];
             replayButton()
+            playerimage.src = "images/magedead.png"
+            playerimage.alt = "magedead"
         }
     }
 }
@@ -361,8 +381,8 @@ function anomalyFightPage(){
     anomalyButtonDisplay();
     button2.textContent = rpg.buttonsEffect.pathSelect[12];
     button2.addEventListener("click", () =>{
-        // playerRollDisplay.textContent = 0;
-        // enemyRollDisplay.textContent = 0;
+        enemyimage.src = "images/anomaly.png";
+        enemyimage.alt = "anomaly";
         hideScore()
         playerHealthDisplay.textContent = rpgfightSystem.health.playerHealth
         enemyHealthDisplay.textContent = rpgfightSystem.health.anomalyHealth
@@ -374,18 +394,6 @@ function anomalyFightPage(){
         anomalyfightSystem()
        })
        
-}
-
-
-function charHealth() {
-    if (rpg.chosenChar === "human"){        
-        playerHealthDisplay.textContent = rpgfightSystem.health.playerHealthHuman
-    }else if (rpg.chosenChar === "knight"){
-        playerHealthDisplay.textContent = rpgfightSystem.health.playerHealth
-    }else if (rpg.chosenChar === "mage"){
-        playerHealthDisplay.textContent = rpgfightSystem.health.playerHealthMAge
-    }
-
 }
 
 function anomalyfightSystem(){
@@ -405,7 +413,8 @@ function anomalyfightSystem(){
         } else if (rpgfightSystem.health.playerHealth <= 0 && rpgfightSystem.health.playerHealth <= rpgfightSystem.health.anomalyHealth){
             replayButton()
             hideScoreAndHealth()
-            content.textContent =rpg.deathText[6];
+            content.textContent = rpg.deathText[6];
+            chardeathimage()
         }
         
     }, {once: true});
@@ -445,6 +454,7 @@ function trainWinCond(){
         }else{
             content.textContent = rpg.deathText[4];
             replayButton()
+            chardeathimage()
         }
     } else if (rpg.trainingSU === true){
         if(rpgfightSystem.playerScore > rpgfightSystem.enemyScore){
@@ -454,16 +464,18 @@ function trainWinCond(){
         }else{
             content.textContent = rpg.deathText[4];
             replayButton()
+            chardeathimage()
             
         }
     } else if (rpg.trainingEat === true){
-        if(rpgfightSystem.playerScore !== 10){
+        if(rpgfightSystem.playerScore === 10){
             content.textContent = rpg.storyText[15]
             replayButtonWinByEating()
             
         }else{
             content.textContent = rpg.deathText[5];
             replayButton()
+            chardeathimage()
         }
     }
 }
@@ -522,6 +534,8 @@ function anomalyButtonDisplay(){
 }
 
 function replayButtonWin(){
+    enemyimage.src = "images/anomalydead.png"
+    enemyimage.alt = "anomalydead"
     hidebottomButtons()
     knightbutton.style.visibility ="visible"
     knightbutton.textContent = "Time for Lunch ?"
@@ -538,6 +552,8 @@ function replayButton(){
 function replayButtonWinByEating(){
     button2.textContent = rpg.buttonsEffect.pathSelect[12];
     button2.addEventListener("click", () => {
+        enemyimage.src = "images/blank.png"
+        enemyimage.alt = "blankfiller"
         hideScore()
         removeButtonsforAnomaly();
         hidebottomButtons();
@@ -551,10 +567,25 @@ function replayButtonWinByEating(){
     
 
 
-//================================================instant death functions================================================
+//================================================death functions================================================
+function chardeathimage() {
+    if (rpg.chosenChar === "human"){        
+        playerimage.src = "images/humandead.png"
+        playerimage.alt = "humandead"
+    }else if (rpg.chosenChar === "knight"){
+        playerimage.src = "images/knightdead.png"
+        playerimage.alt = "knightdead"
+    }else if (rpg.chosenChar === "mage"){
+        playerimage.src = "images/magedead.png"
+        playerimage.alt = "magedead"
+    }
+}
+
 function instantDeath(){
     content.textContent = rpg.deathText[3];
     replayButton();
+    playerimage.src = "images/humanchill.png"
+    playerimage.alt = "humanchill"
 }
 
 function render(){

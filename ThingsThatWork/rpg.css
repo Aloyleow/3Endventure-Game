@@ -1,6 +1,6 @@
 header {
     display: flex;
-    background-color: bisque;
+    background-color: #8ed6ff;
     height: 80px;
     justify-content: center;
     align-items: center;
@@ -16,23 +16,22 @@ header {
 #content {
     display: flex;
     height: 100px;
-    font-size: 40px;
+    font-size: 50px;
     justify-content: center;
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
-    font-style: oblique;
-    
-    
+    font-style: oblique;    
 }
 
 .enemyNumber {
-    display: grid;
+    display: grid; 
     height: 60px;
     font-size: 60px;
     text-align: right;
 }
 
 #enemyHealth {
+    
     height: 60px;
     font-size: 60px;
     color: red;
@@ -41,24 +40,28 @@ header {
 
 .playerNumber {
     display: grid;
+    
     height: 60px;
     font-size: 60px;
     text-align: left;
 }
 
 #playerHealth {
+    
     height: 60px;
     font-size: 60px;
     color: red;
 }
 
 #charSelect {
+    
     display: flex;
     flex-direction: row;
     justify-content: space-around; 
 }
 
 img {
+    
     height: 200px;
     
 }
@@ -70,7 +73,7 @@ img {
 
 
 footer{
-    background-color: rgb(0, 236, 253);
+    background-color:  #8ed6ff;
     display: flex;
     height: 120px;
     justify-content: space-around;
@@ -83,6 +86,5 @@ button{
     width: 110px;
     font-size: 20px;
     background-color: blanchedalmond;
+    border-radius: 12px;
 }
-
-
