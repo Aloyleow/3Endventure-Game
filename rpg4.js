@@ -38,41 +38,9 @@ let rpg = {
 
 }
 
-let rpgfightSystem = {
-    numberRoll: [1,2,3,4,5,6,7,8,9,10],
-    playerScore: [],
-    enemyScore: [],
-    
-    health: {
-        anomalyHealth: 50,
-        playerHealth: 45,
-    } 
-}
-function rng(){
-    let y = Math.random();
-    if (y < 0.1) {
-        return rpgfightSystem.numberRoll[0]; 
-    } else if (y < 0.2) {
-        return rpgfightSystem.numberRoll[1];
-    } else if (y < 0.3) {
-        return rpgfightSystem.numberRoll[2];
-    } else if (y < 0.4) {
-        return rpgfightSystem.numberRoll[3];
-    } else if (y < 0.5) {
-        return rpgfightSystem.numberRoll[4];
-    } else if (y < 0.6) {
-        return rpgfightSystem.numberRoll[5];
-    } else if (y < 0.7) {
-        return rpgfightSystem.numberRoll[6];
-    } else if (y < 0.8) {
-        return rpgfightSystem.numberRoll[7];
-    } else if (y < 0.9) {
-        return rpgfightSystem.numberRoll[8];
-    } else if (y <= 1) {
-        return rpgfightSystem.numberRoll[9];
-    }   
-}
 
+
+//================================================ Push Text Functions ================================================
 function pushCharText(){
     rpg.charText.push("An anomaly has taken over the world, you are the only one left on earth...so to be or not to pee, so who you wan to bee ?");
     rpg.charText.push("HUMAN !!!! What do you wan to do ?");
@@ -137,6 +105,43 @@ function pushPathSelectButtons() {
     )
 }
 
+//================================================Fight System================================================
+
+let rpgfightSystem = {
+    numberRoll: [1,2,3,4,5,6,7,8,9,10],
+    playerScore: [],
+    enemyScore: [],
+    
+    health: {
+        anomalyHealth: 50,
+        playerHealth: 45,
+    } 
+}
+function rng(){
+    let y = Math.random();
+    if (y < 0.1) {
+        return rpgfightSystem.numberRoll[0]; 
+    } else if (y < 0.2) {
+        return rpgfightSystem.numberRoll[1];
+    } else if (y < 0.3) {
+        return rpgfightSystem.numberRoll[2];
+    } else if (y < 0.4) {
+        return rpgfightSystem.numberRoll[3];
+    } else if (y < 0.5) {
+        return rpgfightSystem.numberRoll[4];
+    } else if (y < 0.6) {
+        return rpgfightSystem.numberRoll[5];
+    } else if (y < 0.7) {
+        return rpgfightSystem.numberRoll[6];
+    } else if (y < 0.8) {
+        return rpgfightSystem.numberRoll[7];
+    } else if (y < 0.9) {
+        return rpgfightSystem.numberRoll[8];
+    } else if (y <= 1) {
+        return rpgfightSystem.numberRoll[9];
+    }   
+}
+
 function fightSystemSet(){
     showScore()
     rpgfightSystem.playerScore = rng();
@@ -157,6 +162,7 @@ function fightSystem(){
     button2.addEventListener("click", fightSystemSet);               
 }
 
+//================================================Buttons================================================
 
 function humanPageButtons(){
     button1.textContent = rpg.buttonsEffect.pathSelect[0];
@@ -250,9 +256,7 @@ function afterCharSelectPage(){
     }
 }
 
-//================================================fights and divergence starts================================================
-//set truths
-//
+//================================================fights================================================
 
 function slimeBossFightPage(){
     rpg.slimeFight = true;
@@ -533,6 +537,8 @@ function anomalyButtonDisplay(){
     button3.style.visibility = "hidden";
 }
 
+//================================================Replay Buttons================================================
+
 function replayButtonWin(){
     enemyimage.src = "Images/Anomalydead.png"
     enemyimage.alt = "Anomalydead"
@@ -564,8 +570,6 @@ function replayButtonWinByEating(){
     })
     
 }
-    
-
 
 //================================================death functions================================================
 function chardeathimage() {
