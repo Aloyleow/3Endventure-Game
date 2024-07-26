@@ -74,7 +74,7 @@ function rng(){
 }
 
 function pushCharText(){
-    rpg.charText.push("To be or not to pee, so who you wan to bee ?");
+    rpg.charText.push("An anomaly has taken over the world, you are the only one left on earth...so to be or not to pee, so who you wan to bee ?");
     rpg.charText.push("HUMAN !!!! What do you wan to do ?");
     rpg.charText.push("KNIGHT !!! what you wanna slay ?");
     rpg.charText.push("MAGE !!! tiu tiu tiu...")    
