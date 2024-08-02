@@ -1,5 +1,5 @@
 
-# Development of 3End-venture Game (V0.01)
+# Development of 3End-venture Game (V1.0.0)
 
 
 ## Project summary
